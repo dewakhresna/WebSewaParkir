@@ -11,7 +11,15 @@ namespace WebSewaParkir
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.MapMvcAttributeRoutes();
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                name: "DashboardAdmin",
+                url: "dashboard_admin",
+                defaults: new { controller = "Admin", action = "Dashboard" }
+            );
 
             routes.MapRoute(
                 name: "Default",
