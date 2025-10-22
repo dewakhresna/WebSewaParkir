@@ -1,8 +1,4 @@
-﻿@*
-    Layout utama untuk halaman admin (setara dengan layouts/admin-template.blade.php)
-*@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,9 +10,9 @@
     <meta name="keywords" content="" />
 
     <!-- Favicons -->
-    <link rel="icon" href="~/assets/img/favicon.png" />
+    @*<link rel="icon" href="~/assets/img/favicon.png" />
     <link rel="apple-touch-icon" href="~/assets/img/apple-touch-icon.png" />
-    <link rel="icon" href="~/assets/img/logo_3.png" />
+    <link rel="icon" href="~/assets/img/logo_3.png" />*@
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -26,15 +22,14 @@
     <link href="@Url.Content("~/Content/vendor/bootstrap/css/bootstrap.min.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/vendor/bootstrap-icons/bootstrap-icons.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/vendor/boxicons/css/boxicons.min.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/vendor/bootstrap/css/bootstrap.min.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/vendor/quill/quill.snow.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/remixicon/remixicon.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/simple-datatables/style.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/vendor/quill/quill.bubble.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/vendor/remixicon/remixicon.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/vendor/simple-datatables/style.css")" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
     <link href="@Url.Content("~/Content/css/admin.css")" rel="stylesheet" />
 
-    @RenderSection("styles", required: false)
 </head>
 
 <body>
@@ -69,6 +64,5 @@
     <!-- Template Main JS File -->
     <script src="@Url.Content("~/Content/js/admin.js")"></script>
 
-    @RenderSection("scripts", required: false)
 </body>
 </html>

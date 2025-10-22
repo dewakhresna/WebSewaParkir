@@ -1243,3 +1243,63 @@ h6 {
    font-size: 13px;
    color: #012970;
  }
+
+/* Custom styling for profile page */
+.nav-tabs-bordered {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.nav-tabs-bordered .nav-link {
+    padding: 12px 20px;
+    font-weight: 600;
+    color: #495057;
+    border: none;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-tabs-bordered .nav-link.active {
+    color: #4154f1;
+    border-bottom-color: #4154f1;
+    background-color: transparent;
+}
+
+.nav-tabs-bordered .nav-link:hover:not(.active) {
+    border-bottom-color: #dee2e6;
+}
+
+/* Profile image styling */
+#profilePreview {
+    object-fit: cover;
+    border: 3px solid #f0f0f0;
+}
+
+/* Password strength indicator */
+.password-strength .progress {
+    background-color: #e9ecef;
+}
+
+.password-strength .progress-bar {
+    transition: width 0.3s ease;
+}
+
+/* Toggle password visibility */
+.toggle-password {
+    color: #6c757d;
+}
+
+    .toggle-password:hover {
+        color: #4154f1;
+    }
+
+/* Form validation feedback */
+.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .col-md-3.col-form-label {
+        text-align: left;
+        margin-bottom: 0.5rem;
+    }
+}

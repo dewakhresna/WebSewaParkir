@@ -17,8 +17,38 @@ namespace WebSewaParkir
 
             routes.MapRoute(
                 name: "DashboardAdmin",
-                url: "dashboard_admin",
+                url: "admin/dashboard",
                 defaults: new { controller = "Admin", action = "Dashboard" }
+            );
+
+            routes.MapRoute(
+                name: "LoginAdmin",
+                url: "admin/login",
+                defaults: new { controller = "Admin", action = "Login" }
+            );
+
+            routes.MapRoute(
+                name: "User",
+                url: "admin/user",
+                defaults: new { controller = "Admin", action = "User" }
+            );
+
+            routes.MapRoute(
+                name: "AddUser",
+                url: "admin/add_user",
+                defaults: new { controller = "Admin", action = "AddUser" }
+            );
+
+            routes.MapRoute(
+                name: "EditUser",
+                url: "admin/edit_user",
+                defaults: new { controller = "Admin", action = "EditUser" }
+            );
+
+            routes.MapRoute(
+                name: "Profile",
+                url: "admin/profile",
+                defaults: new { controller = "Admin", action = "Profile" }
             );
 
             routes.MapRoute(

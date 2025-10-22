@@ -344,32 +344,102 @@
     }
 })();
 
+//document.addEventListener('DOMContentLoaded', function () {
+//    var basicModal = document.getElementById('basicModal');
+//    basicModal.addEventListener('show.bs.modal', function (event) {
+//        var button = event.relatedTarget; // Tombol yang diklik
+//        var id = button.getAttribute('data-id');
+//        var paymentProof = button.getAttribute('data-payment_proof');
+
+//        // Update gambar
+//        var img = basicModal.querySelector('#payment-proof-img');
+//        img.src = '/storage/assets/payment_proof/' + paymentProof;
+
+//        // Update action form
+//        document.getElementById('reject-form').action = '/transactions/' + id + '/reject';
+//        document.getElementById('accept-form').action = '/transactions/' + id + '/accept';
+//    });
+//});
+
+//document.addEventListener('DOMContentLoaded', function () {
+//    var pictureModal = document.getElementById('pictureModal');
+//    pictureModal.addEventListener('show.bs.modal', function (event) {
+//        var button = event.relatedTarget; // Tombol yang diklik
+//        var id = button.getAttribute('data-id');
+//        var requestPicture = button.getAttribute('data-request-picture');
+
+//        // Update gambar
+//        var img = pictureModal.querySelector('#request-picture-img');
+//        img.src = '/storage/assets/request_picture/' + requestPicture;
+//    });
+//});
+
 document.addEventListener('DOMContentLoaded', function () {
-    var basicModal = document.getElementById('basicModal');
-    basicModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget; // Tombol yang diklik
-        var id = button.getAttribute('data-id');
-        var paymentProof = button.getAttribute('data-payment_proof');
-
-        // Update gambar
-        var img = basicModal.querySelector('#payment-proof-img');
-        img.src = '/storage/assets/payment_proof/' + paymentProof;
-
-        // Update action form
-        document.getElementById('reject-form').action = '/transactions/' + id + '/reject';
-        document.getElementById('accept-form').action = '/transactions/' + id + '/accept';
+    // Preview profile image before upload
+    document.getElementById('profileImage').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                document.getElementById('profilePreview').src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
     });
-});
 
-document.addEventListener('DOMContentLoaded', function () {
-    var pictureModal = document.getElementById('pictureModal');
-    pictureModal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget; // Tombol yang diklik
-        var id = button.getAttribute('data-id');
-        var requestPicture = button.getAttribute('data-request-picture');
 
-        // Update gambar
-        var img = pictureModal.querySelector('#request-picture-img');
-        img.src = '/storage/assets/request_picture/' + requestPicture;
-    });
+    // Password strength indicator
+    const newPassword = document.getElementById('newPassword');
+    if (newPassword) {
+        newPassword.addEventListener('input', function () {
+            const strength = checkPasswordStrength(this.value);
+            const progressBar = this.parentElement.querySelector('.progress-bar');
+            const strengthText = this.parentElement.querySelector('.strength-text');
+
+            progressBar.style.width = strength.percentage + '%';
+            progressBar.className = 'progress-bar bg-' + strength.color;
+            strengthText.textContent = strength.text;
+            strengthText.className = 'strength-text text-' + strength.color;
+        });
+    }
+
+    // Password confirmation check
+    const renewPassword = document.getElementById('renewPassword');
+    if (renewPassword) {
+        renewPassword.addEventListener('input', function () {
+            const matchDiv = document.getElementById('passwordMatch');
+            if (this.value === newPassword.value) {
+                matchDiv.innerHTML = '<i class="bi bi-check-circle-fill text-success me-1"></i>Password cocok';
+            } else {
+                matchDiv.innerHTML = '<i class="bi bi-exclamation-circle-fill text-danger me-1"></i>Password tidak cocok';
+            }
+        });
+    }
+
+    // Check password strength
+    function checkPasswordStrength(password) {
+        let strength = 0;
+
+        // Check length
+        if (password.length >= 8) strength++;
+        if (password.length >= 12) strength++;
+
+        // Check for mixed case
+        if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+
+        // Check for numbers
+        if (/\d/.test(password)) strength++;
+
+        // Check for special chars
+        if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+        // Determine strength level
+        if (strength <= 2) {
+            return { percentage: 33, color: 'danger', text: 'Lemah' };
+        } else if (strength <= 4) {
+            return { percentage: 66, color: 'warning', text: 'Sedang' };
+        } else {
+            return { percentage: 100, color: 'success', text: 'Kuat' };
+        }
+    }
 });
