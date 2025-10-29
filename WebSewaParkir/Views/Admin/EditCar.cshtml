@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "EditCar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>Edit Car</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Dashboard", "Admin")">Home</a></li>
+            <li class="breadcrumb-item active">Edit Car</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Edit Car</h5>
+
+                <!-- General Form Elements -->
+                <form method="POST" action="" enctype="multipart/form-data">
+                    <div class="row mb-3">
+                        <label for="customer_name" class="col-sm-2 col-form-label">Customer Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="customer_name" name="customer_name" value="" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="no_police" class="col-sm-2 col-form-label">No Police</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="no_police" name="no_police" value="" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="car_name" class="col-sm-2 col-form-label">Car Name</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="car_name" name="car_name" value="" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="start_date" name="start_date" value="" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="end_date" name="end_date" value="" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Edit Car</button>
+                        </div>
+                    </div>
+
+                </form><!-- End General Form Elements -->
+            </div>
+        </div>
+    </div>
+</section>
+

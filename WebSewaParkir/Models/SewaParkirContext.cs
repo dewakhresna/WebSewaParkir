@@ -16,8 +16,7 @@ namespace WebSewaParkir.Data
 
         // Representasi tabel di database
         public DbSet<User> Users { get; set; }
+        public DbSet<CarRental> CarRentals { get; set; }
 
-        // Jika kamu nanti punya tabel lain (misal Parkir, Kendaraan), tambahkan di sini:
-        // public DbSet<Parkir> Parkirs { get; set; }
     }
 }

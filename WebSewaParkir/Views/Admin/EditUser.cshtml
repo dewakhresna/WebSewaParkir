@@ -1,6 +1,6 @@
-﻿
+﻿@model WebSewaParkir.Models.User
 @{
-    ViewBag.Title = "EditUser";
+    ViewBag.Title = "Edit User";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -8,69 +8,57 @@
     <h1>Edit User</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Dashboard", "Admin")">Home</a></li>
             <li class="breadcrumb-item active">Edit User</li>
         </ol>
     </nav>
-</div><!-- End Page Title -->
+</div>
 
 <section class="section">
     <div class="row">
-
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Add User</h5>
+                <h5 class="card-title">Edit User</h5>
 
-                <!-- General Form Elements -->
-                <form method="POST" action="" enctype="multipart/form-data">
+                @using (Html.BeginForm("EditUser", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)
+
                     <div class="row mb-3">
-                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <label class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" value="" required>
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })
                         </div>
                     </div>
+
                     <div class="row mb-3">
-                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <label class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="email" name="email" value="" required>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", required = "required" })
                         </div>
                     </div>
+
                     <div class="row mb-3">
-                        <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                        <label class="col-sm-2 col-form-label">Telp</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="phone" name="phone" value="" required>
+                            @Html.TextBoxFor(model => model.Telp, new { @class = "form-control", required = "required" })
                         </div>
                     </div>
+
                     <div class="row mb-3">
-                        <label for="addres" class="col-sm-2 col-form-label">Addres</label>
+                        <label class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                            <textarea name="addres"
-                                      class="form-control"
-                                      id="addres"
-                                      rows="3"
-                                      required></textarea>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="password" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="password_confirmation" class="col-sm-2 col-form-label">Confirm Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Leave blank if unchanged" })
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Add User</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </div>
-
-                </form><!-- End General Form Elements -->
+                }
             </div>
         </div>
     </div>

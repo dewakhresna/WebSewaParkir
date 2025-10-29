@@ -11,7 +11,7 @@
     <h1>Dashboard</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Dashboard", "Admin")">Home</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
         </ol>
     </nav>
@@ -22,35 +22,48 @@
         <!-- Recent Sales -->
         <div class="col-12">
             <div class="card recent-sales overflow-auto">
-
-
+                <div class="filter">
+                    <a class="icon" href="@Url.Action("AddCar", "Admin")"><button type="button" class="btn btn-success"><i class="bx bx-list-plus me-1"></i> Add Car</button></a>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Data Transaction</h5>
+                    <h5 class="card-title">Car Rental Data</h5>
 
                     <table class="table table-borderless datatable">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Size Product</th>
                                 <th scope="col">Customer Name</th>
-                                <th scope="col">Payment Method</th>
-                                <th scope="col">Payment Proof</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Payment Status</th>
-                                <th scope="col">More</th>
+                                <th scope="col">No Police</th>
+                                <th scope="col">Car Name</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row"><a href="#"></a>dsdsa</th>
-                                <td>tes</td>
-                                <td>tes</td>
-                                <td>tes</td>
-                                <td>tes</td>
-                                <td>tes</td>
-                                <td>tes</td>
-                                <td>tes</td>
-                                <td>tes</td>
+                                <th scope="row"><a href="#">1</a></th>
+                                <td>Budi</td>
+                                <td>B 1234 NDA</td>
+                                <td>Avanza</td>
+                                <td>17 April 2025</td>
+                                <td>17 Mei 2025</td>
+                                <td>
+                                    <a href="@Url.Action("EditCar", "Admin")" class="btn badge bg-warning">Edit</a>
+                                    <a href="" class="btn badge bg-danger">Delete</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><a href="#">2</a></th>
+                                <td>Dani</td>
+                                <td>F 3421 ERY</td>
+                                <td>Brio</td>
+                                <td>17 June 2025</td>
+                                <td>17 July 2025</td>
+                                <td>
+                                    <a href="@Url.Action("EditCar", "Admin")" class="btn badge bg-warning">Edit</a>
+                                    <a href="" class="btn badge bg-danger">Delete</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -59,32 +72,6 @@
         </div><!-- End Recent Sales -->
     </div>
 </section>
-
-<!-- Basic Modal -->
-<div class="modal fade" id="basicModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Payment Proof</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <img id="payment-proof-img" src="" alt="Payment Proof" class="img-fluid mb-3">
-            </div>
-            <div class="modal-footer">
-                <!-- Reject Form -->
-                <form id="reject-form" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-danger">Reject</button>
-                </form>
-
-                <!-- Accept Form -->
-                <form id="accept-form" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-success">Accept</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 @*@section scripts {
         <script>

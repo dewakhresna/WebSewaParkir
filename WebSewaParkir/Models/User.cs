@@ -22,7 +22,6 @@ namespace WebSewaParkir.Models
         [StringLength(15)]
         public string Telp { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Password { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿
+﻿@model WebSewaParkir.Models.User
+
 @{
     ViewBag.Title = "AddUser";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -8,7 +9,7 @@
     <h1>Add User</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Dashboard", "Admin")">Home</a></li>
             <li class="breadcrumb-item active">Add User</li>
         </ol>
     </nav>
@@ -16,61 +17,58 @@
 
 <section class="section">
     <div class="row">
-
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Add User</h5>
 
-                <!-- General Form Elements -->
-                <form method="POST" action="" enctype="multipart/form-data">
+                @using (Html.BeginForm("AddUser", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
                     <div class="row mb-3">
-                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        @Html.LabelFor(m => m.Name, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" value="" required>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.Name)
                         </div>
                     </div>
+
                     <div class="row mb-3">
-                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="email" name="email" value="" required>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = "required" })
+                            @Html.ValidationMessageFor(m => m.Email)
                         </div>
                     </div>
+
                     <div class="row mb-3">
-                        <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                        @Html.LabelFor(m => m.Telp, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="phone" name="phone" value="" required>
+                            @Html.TextBoxFor(m => m.Telp, new { @class = "form-control", type = "number", required = "required" })
+                            @Html.ValidationMessageFor(m => m.Telp)
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <label for="addres" class="col-sm-2 col-form-label">Addres</label>
-                        <div class="col-sm-10">
-                            <textarea name="addres"
-                                      class="form-control"
-                                      id="addres"
-                                      rows="3"
-                                      required></textarea>
-                        </div>
-                    </div>
+
                     <div class="row mb-3">
                         <label for="password" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" name="Password" id="password" class="form-control" required />
                         </div>
                     </div>
+
                     <div class="row mb-3">
                         <label for="password_confirmation" class="col-sm-2 col-form-label">Confirm Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                            <input type="password" name="PasswordConfirmation" id="password_confirmation" class="form-control" required />
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-sm-10">
+                        <div class="col-sm-10 offset-sm-2">
                             <button type="submit" class="btn btn-primary">Add User</button>
                         </div>
                     </div>
-
-                </form><!-- End General Form Elements -->
+                }
             </div>
         </div>
     </div>

@@ -29,33 +29,27 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone</th>
-                                <th scope="col">Addres</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row"><a href="#">1</a></th>
-                                <td>Budi</td>
-                                <td>budi01@gmail.com</td>
-                                <td>081234567890</td>
-                                <td>Jalan Sukmajaya, Depok</td>
-                                <td>
-                                    <a href="@Url.Action("EditUser", "Admin")" class="btn badge bg-warning">Edit</a>
-                                    <a href="" class="btn badge bg-danger">Delete</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#">2</a></th>
-                                <td>Dani</td>
-                                <td>dani01@gmail.com</td>
-                                <td>081234567890</td>
-                                <td>Jalan Pemuda, Depok</td>
-                                <td>
-                                    <a href="@Url.Action("EditUser", "Admin")" class="btn badge bg-warning">Edit</a>
-                                    <a href="" class="btn badge bg-danger">Delete</a>
-                                </td>
-                            </tr>
+                            @{
+                                int no = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row">@no</th>
+                                        <td>@item.Name</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.Telp</td>
+                                        <td>
+                                            <a href="@Url.Action("EditUser", "Admin", new { id = item.Id })" class="btn badge bg-warning">Edit</a>
+                                            <a href="@Url.Action("DeleteUser", "Admin", new { id = item.Id })" class="btn badge bg-danger" onclick="return confirm('Yakin ingin menghapus?')">Delete</a>
+                                        </td>
+                                    </tr>
+                                    no++;
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>
