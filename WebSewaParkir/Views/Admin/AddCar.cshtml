@@ -23,47 +23,53 @@
                 <h5 class="card-title">Add Car</h5>
 
                 <!-- General Form Elements -->
-                @using (Html.BeginForm("AddUser", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("AddCar", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
+                    @Html.AntiForgeryToken()
+
                     <div class="row mb-3">
-                        <label for="customer_name" class="col-sm-2 col-form-label">Customer Name</label>
+                        @Html.LabelFor(m => m.CustomerName, new { @class = "col-sm-2 col-form-label" })
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="customer_name" name="customer_name" value="" required>
+                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.CustomerName)
                         </div>
                     </div>
-                        <div class="row mb-3">
-                            <label for="no_police" class="col-sm-2 col-form-label">No Police</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" id="no_police" name="no_police" value="" required>
-                            </div>
+                    <div class="row mb-3">
+                        @Html.LabelFor(m => m.NoPolice, new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.NoPolice, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.NoPolice)
                         </div>
-                        <div class="row mb-3">
-                            <label for="car_name" class="col-sm-2 col-form-label">Car Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="car_name" name="car_name" value="" required>
-                            </div>
+                    </div>
+                    <div class="row mb-3">
+                        @Html.LabelFor(m => m.CarName, new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.CarName, new { @class = "form-control", required = "required" })
+                            @Html.ValidationMessageFor(m => m.NoPolice)
                         </div>
-                        <div class="row mb-3">
-                            <label for="start_date" class="col-sm-2 col-form-label">Start Date</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" id="start_date" name="start_date" value="" required>
-                            </div>
+                    </div>
+                    <div class="row mb-3">
+                        @Html.LabelFor(m => m.StartDate, new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", required = "required" })
+                            @Html.ValidationMessageFor(m => m.StartDate)
                         </div>
-                        <div class="row mb-3">
-                            <label for="end_date" class="col-sm-2 col-form-label">End Date</label>
-                            <div class="col-sm-10">
-                                <input type="date" class="form-control" id="end_date" name="end_date" value="" required>
-                            </div>
+                    </div>
+                    <div class="row mb-3">
+                        @Html.LabelFor(m => m.EndDate, new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(m => m.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", required = "required" })
+                            @Html.ValidationMessageFor(m => m.EndDate)
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Add Car</button>
-                            </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Add Car</button>
                         </div>
-                 }
+                    </div>
+                }
             </div>
         </div>
     </div>
 </section>
-

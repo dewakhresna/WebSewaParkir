@@ -14,8 +14,8 @@ namespace WebSewaParkir.Controllers
 
         public ActionResult Dashboard()
         {
-            var rentals = db.CarRentals.ToList();
-            return View(rentals);
+            var cars = db.CarRentals.ToList();
+            return View(cars);
         }
         [HttpGet]
         public ActionResult AddCar()
@@ -31,13 +31,42 @@ namespace WebSewaParkir.Controllers
             {
                 db.CarRentals.Add(car);
                 db.SaveChanges();
-                return RedirectToAction("CarRental");
+                return RedirectToAction("dashboard");
             }
             return View(car);
         }
-        public ActionResult EditCar()
+
+        [HttpGet]
+        public ActionResult EditCar(int id)
         {
-            return View();
+            var car = db.CarRentals.Find(id);
+            if (car == null)
+                return HttpNotFound();
+            return View(car);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCar(CarRental car)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(car).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("dashboard");
+            }
+            return View(car);
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCar(int id)
+        {
+            var car = db.CarRentals.Find(id);
+            if (car != null)
+            {
+                db.CarRentals.Remove(car);
+                db.SaveChanges();
+            }
+            return RedirectToAction("dashboard");
         }
         public ActionResult User()
         {
@@ -129,20 +158,6 @@ namespace WebSewaParkir.Controllers
                 db.SaveChanges();
             }
             return RedirectToAction("User");
-        }
-
-        [HttpPost, ActionName("DeleteUser")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            var user = db.Users.Find(id);
-            if (user == null)
-                return HttpNotFound();
-
-            db.Users.Remove(user);
-            db.SaveChanges();
-
-            return RedirectToAction("User"); // kembali ke daftar user
         }
 
         public ActionResult Profile()

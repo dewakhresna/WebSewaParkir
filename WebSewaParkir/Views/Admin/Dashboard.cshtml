@@ -41,30 +41,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row"><a href="#">1</a></th>
-                                <td>Budi</td>
-                                <td>B 1234 NDA</td>
-                                <td>Avanza</td>
-                                <td>17 April 2025</td>
-                                <td>17 Mei 2025</td>
-                                <td>
-                                    <a href="@Url.Action("EditCar", "Admin")" class="btn badge bg-warning">Edit</a>
-                                    <a href="" class="btn badge bg-danger">Delete</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><a href="#">2</a></th>
-                                <td>Dani</td>
-                                <td>F 3421 ERY</td>
-                                <td>Brio</td>
-                                <td>17 June 2025</td>
-                                <td>17 July 2025</td>
-                                <td>
-                                    <a href="@Url.Action("EditCar", "Admin")" class="btn badge bg-warning">Edit</a>
-                                    <a href="" class="btn badge bg-danger">Delete</a>
-                                </td>
-                            </tr>
+                            @{
+                                int no = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row"><a href="#">@no</a></th>
+                                        <td>@item.CustomerName</td>
+                                        <td>@item.NoPolice</td>
+                                        <td>@item.CarName</td>
+                                        <td>@item.StartDate.ToString("dd MMMM yyyy")</td>
+                                        <td>@item.EndDate.ToString("dd MMMM yyyy")</td>
+                                        <td>
+                                            <a href="@Url.Action("EditCar", "Admin", new { id = item.Id })" class="btn badge bg-warning">Edit</a>
+                                            <a href="@Url.Action("DeleteCar", "Admin", new { id = item.Id })" class="btn badge bg-danger" onclick="return confirm('Yakin ingin menghapus?')">Delete</a>
+                                        </td>
+                                    </tr>
+                                    no++;
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>

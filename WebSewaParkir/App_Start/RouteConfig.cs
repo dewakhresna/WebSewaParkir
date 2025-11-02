@@ -22,6 +22,18 @@ namespace WebSewaParkir
             );
 
             routes.MapRoute(
+                name: "AddCar",
+                url: "admin/add_car",
+                defaults: new { controller = "Admin", action = "AddCar" }
+            );
+
+            routes.MapRoute(
+                name: "EditCar",
+                url: "admin/edit_car",
+                defaults: new { controller = "Admin", action = "EditCar" }
+            );
+
+            routes.MapRoute(
                 name: "LoginAdmin",
                 url: "admin/login",
                 defaults: new { controller = "Admin", action = "Login" }
