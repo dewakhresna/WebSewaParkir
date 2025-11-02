@@ -1,4 +1,5 @@
-﻿
+﻿@model WebSewaParkir.Models.Admin
+
 @{
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -28,7 +29,7 @@
                         <div class="tab-pane fade show active" id="profile-edit">
                             <form action="" method="POST" enctype="multipart/form-data" id="profileForm">
                                 <div class="row mb-4 align-items-center">
-                                    <label for="profileImage" class="col-md-3 col-form-label">Foto Profile</label>
+                                    <label for="profileImage" class="col-md-3 col-form-label">Photo</label>
                                     <div class="col-md-9">
                                         <div class="d-flex align-items-center">
                                             <div class="me-3">
@@ -63,7 +64,7 @@
                                                type="text"
                                                class="form-control"
                                                id="nama"
-                                               value=""
+                                               value="@Model.Username"
                                                required>
                                     </div>
                                 </div>
@@ -75,46 +76,10 @@
                                                type="email"
                                                class="form-control"
                                                id="email"
-                                               value=""
+                                               value="@Model.Email"
                                                required>
                                     </div>
                                 </div>
-
-                                <div class="row mb-3">
-                                    <label for="notelp" class="col-md-3 col-form-label">Phone</label>
-                                    <div class="col-md-9">
-                                        <input name="notelp"
-                                               type="tel"
-                                               class="form-control"
-                                               id="notelp"
-                                               value=""
-                                               required>
-                                    </div>
-                                </div>
-
-                                @*<div class="row mb-3">
-                                    <label for="kota" class="col-md-3 col-form-label">City</label>
-                                    <div class="col-md-9">
-                                        <select name="kota" class="form-select" id="kota" required>
-                                            <option value="Jakarta Utara" {{ old('kota', $user->kota) == 'Jakarta Utara' ? 'selected' : '' }}>Jakarta Utara</option>
-                                            <option value="Jakarta Timur" {{ old('kota', $user->kota) == 'Jakarta Timur' ? 'selected' : '' }}>Jakarta Timur</option>
-                                            <option value="Jakarta Barat" {{ old('kota', $user->kota) == 'Jakarta Barat' ? 'selected' : '' }}>Jakarta Barat</option>
-                                            <option value="Jakarta Pusat" {{ old('kota', $user->kota) == 'Jakarta Pusat' ? 'selected' : '' }}>Jakarta Pusat</option>
-                                            <option value="Jakarta Selatan" {{ old('kota', $user->kota) == 'Jakarta Selatan' ? 'selected' : '' }}>Jakarta Selatan</option>
-                                        </select>
-                                    </div>
-                                </div>*@
-
-                                @*<div class="row mb-4">
-                                    <label for="alamat" class="col-md-3 col-form-label">Address</label>
-                                    <div class="col-md-9">
-                                        <textarea name="alamat"
-                                                  class="form-control"
-                                                  id="alamat"
-                                                  rows="3"
-                                                  required>{{ old('alamat', $user->alamat) }}</textarea>
-                                    </div>
-                                </div>*@
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary px-4">

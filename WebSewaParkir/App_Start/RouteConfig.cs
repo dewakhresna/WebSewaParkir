@@ -33,11 +33,11 @@ namespace WebSewaParkir
                 defaults: new { controller = "Admin", action = "EditCar" }
             );
 
-            routes.MapRoute(
-                name: "LoginAdmin",
-                url: "admin/login",
-                defaults: new { controller = "Admin", action = "Login" }
-            );
+            //routes.MapRoute(
+            //    name: "LoginAdmin",
+            //    url: "admin/login",
+            //    defaults: new { controller = "Admin", action = "Login" }
+            //);
 
             routes.MapRoute(
                 name: "User",
@@ -61,6 +61,12 @@ namespace WebSewaParkir
                 name: "Profile",
                 url: "admin/profile",
                 defaults: new { controller = "Admin", action = "Profile" }
+            );
+
+            routes.MapRoute(
+                name: "LoginAdmin",
+                url: "admin/login",
+                defaults: new { controller = "Auth", action = "Login" }
             );
 
             routes.MapRoute(

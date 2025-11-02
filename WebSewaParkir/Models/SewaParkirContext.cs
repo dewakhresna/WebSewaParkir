@@ -17,6 +17,6 @@ namespace WebSewaParkir.Data
         // Representasi tabel di database
         public DbSet<User> Users { get; set; }
         public DbSet<CarRental> CarRentals { get; set; }
-
+        public DbSet<Admin> Admins { get; set; }
     }
 }

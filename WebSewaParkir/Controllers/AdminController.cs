@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using WebSewaParkir.Data;
 using WebSewaParkir.Models;
+using WebSewaParkir.Filters;
 
 namespace WebSewaParkir.Controllers
 {
+    [AdminAuthorize]
     public class AdminController : Controller
     {
         private SewaParkirContext db = new SewaParkirContext();
@@ -162,13 +164,16 @@ namespace WebSewaParkir.Controllers
 
         public ActionResult Profile()
         {
-            return View();
-        }
+            int adminId = Convert.ToInt32(Session["AdminId"]);
 
-        public ActionResult Login()
-        {
-            return View();
-        }
+            var admin = db.Admins.Find(adminId);
 
+            if (admin == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            return View(admin);
+        }
     }
 }
