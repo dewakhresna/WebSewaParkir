@@ -27,13 +27,15 @@
                     <div class="tab-content pt-2">
                         <!-- Edit Profile Tab -->
                         <div class="tab-pane fade show active" id="profile-edit">
-                            <form action="" method="POST" enctype="multipart/form-data" id="profileForm">
+                            @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
                                 <div class="row mb-4 align-items-center">
                                     <label for="profileImage" class="col-md-3 col-form-label">Photo</label>
                                     <div class="col-md-9">
                                         <div class="d-flex align-items-center">
                                             <div class="me-3">
-                                                <img src=""
+                                                <img src="@Url.Content("~/Uploads/Admin/Profile/" + Model.Photo)"
                                                      alt="Profile"
                                                      class="border rounded-circle"
                                                      width="100"
@@ -42,7 +44,7 @@
                                             </div>
                                             <div>
                                                 <input type="file"
-                                                       name="foto"
+                                                       name="photo"
                                                        id="profileImage"
                                                        class="form-control d-none"
                                                        accept="image/*">
@@ -60,24 +62,26 @@
                                 <div class="row mb-3">
                                     <label for="nama" class="col-md-3 col-form-label">Name</label>
                                     <div class="col-md-9">
-                                        <input name="nama"
+                                        @*<input name="nama"
                                                type="text"
                                                class="form-control"
                                                id="nama"
                                                value="@Model.Username"
-                                               required>
+                                               required>*@
+                                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="email" class="col-md-3 col-form-label">Email</label>
                                     <div class="col-md-9">
-                                        <input name="email"
+                                        @*<input name="email"
                                                type="email"
                                                class="form-control"
                                                id="email"
                                                value="@Model.Email"
-                                               required>
+                                               required>*@
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email" })
                                     </div>
                                 </div>
 
@@ -86,42 +90,47 @@
                                         <i class="bi bi-save me-1"></i> Save
                                     </button>
                                 </div>
-                            </form>
+                            }
                         </div>
 
                         <!-- Change Password Tab -->
                         <div class="tab-pane fade" id="profile-change-password">
-                            <form action="" method="POST" id="passwordForm">
+                            @using (Html.BeginForm("ChangePassword", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
                                 <div class="row mb-3">
                                     <label for="currentPassword" class="col-md-3 col-form-label">Current Password</label>
                                     <div class="col-md-9 position-relative">
-                                        <input name="current_password"
+                                        @*<input name="current_password"
                                                type="password"
                                                class="form-control"
                                                id="currentPassword"
-                                               required>
+                                               required>*@
+                                        @Html.Password("current_password", null, new { @class = "form-control", id = "currentPassword", required = "required" })
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="newPassword" class="col-md-3 col-form-label">New Password</label>
                                     <div class="col-md-9 position-relative">
-                                        <input name="new_password"
+                                        @*<input name="new_password"
                                                type="password"
                                                class="form-control"
                                                id="newPassword"
-                                               required>
+                                               required>*@
+                                        @Html.Password("new_password", null, new { @class = "form-control", id = "newPassword", required = "required" })
                                     </div>
                                 </div>
 
                                 <div class="row mb-4">
                                     <label for="renewPassword" class="col-md-3 col-form-label">Confirm Password</label>
                                     <div class="col-md-9 position-relative">
-                                        <input name="new_password_confirmation"
+                                        @*<input name="new_password_confirmation"
                                                type="password"
                                                class="form-control"
                                                id="renewPassword"
-                                               required>
+                                               required>*@
+                                        @Html.Password("new_password_confirmation", null, new { @class = "form-control", id = "renewPassword", required = "required" })
                                         <div id="passwordMatch" class="mt-2 small"></div>
                                     </div>
                                 </div>
@@ -131,8 +140,7 @@
                                         <i class="bi bi-key me-1"></i> Save
                                     </button>
                                 </div>
-                            </form>
-                        </div>
+                            }
                     </div>
                 </div>
             </div>

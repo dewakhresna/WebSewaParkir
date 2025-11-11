@@ -1,0 +1,12 @@
+﻿@using Models.Master
+@model List<MasterKendaraanModel>
+
+<h3 class="text-primary">Master Kendaraan</h3>
+
+<a asp-action="Add" asp-controller="MasterKendaraan">Add New Data</a>
+@{
+    foreach (var item in Model)
+    {
+        <h3>@item.Tipe</h3>
+    }
+}

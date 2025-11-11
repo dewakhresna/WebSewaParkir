@@ -24,9 +24,6 @@ namespace WebSewaParkir.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
         {
-            System.Diagnostics.Debug.WriteLine("Email: " + email);
-            System.Diagnostics.Debug.WriteLine("Password: " + password);
-
             var admin = db.Admins.FirstOrDefault(a => a.Email == email && a.Password == password);
 
             if (admin != null)
