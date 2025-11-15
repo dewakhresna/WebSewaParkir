@@ -1,6 +1,6 @@
 ﻿using Models.Master;
 
-namespace Admin.Interfaces
+namespace KandangMobil.Interfaces
 {
     public interface IMasterKendaraan
     {

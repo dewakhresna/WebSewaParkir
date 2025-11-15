@@ -1,7 +1,5 @@
-using Admin.DBContext;
-using Admin.Interfaces;
+using KandangMobil.DBContext;
 using KandangMobil.Interfaces;
-using Admin.Repositories;
 using KandangMobil.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<DapperDbContext, DapperDbContext>();
 builder.Services.AddTransient<IMasterKendaraan, MasterKendaraanRepository>();
 builder.Services.AddTransient<IMasterUser, MasterUserRepository>();
+builder.Services.AddTransient<IMasterRental, MasterRentalRepository>();
 
 var app = builder.Build();
 

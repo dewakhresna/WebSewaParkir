@@ -1,4 +1,4 @@
-﻿using Admin.DBContext;
+﻿using KandangMobil.DBContext;
 using Dapper;
 using KandangMobil.Interfaces;
 using Models.Master;

@@ -1,9 +1,9 @@
-﻿using Admin.DBContext;
-using Admin.Interfaces;
+﻿using KandangMobil.DBContext;
+using KandangMobil.Interfaces;
 using Dapper;
 using Models.Master;
 
-namespace Admin.Repositories
+namespace KandangMobil.Repositories
 {
     public class MasterKendaraanRepository : IMasterKendaraan
     {

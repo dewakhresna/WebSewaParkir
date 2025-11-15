@@ -1,5 +1,4 @@
-﻿using Admin.Interfaces;
-using KandangMobil.Interfaces;
+﻿using KandangMobil.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.Master;
 using System.Reflection;

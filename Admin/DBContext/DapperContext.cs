@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
 
-namespace Admin.DBContext
+namespace KandangMobil.DBContext
 {
     //DefaultConnection
     public class DapperDbContext

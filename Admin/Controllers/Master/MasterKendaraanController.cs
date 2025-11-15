@@ -1,8 +1,8 @@
-﻿using Admin.Interfaces;
+﻿using KandangMobil.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.Master;
 
-namespace Admin.Controllers.Master
+namespace KandangMobil.Controllers.Master
 {
     public class MasterKendaraanController : Controller
     {
