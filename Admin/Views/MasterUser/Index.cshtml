@@ -1,0 +1,62 @@
+﻿@using Models.Master
+@model List<MasterUserModel>
+
+@{
+    ViewData["Title"] = "Dashboard User";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>User Data</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active">User Data</li>
+        </ol>
+    </nav>
+</div>
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+                <div class="filter">
+                    <a class="icon" asp-action="Add" asp-controller="MasterUser"><button type="button" class="btn btn-success"><i class="bx bx-list-plus me-1"></i> Add User</button></a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">User Data</h5>
+                    <table class="table table-borderless datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int no = 1;
+                            }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@no</th>
+                                    <td>@item.Name</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.Telp</td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn badge bg-warning">Edit</a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn badge bg-danger">Delete</a>
+                                    </td>
+                                </tr>
+
+                                no++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

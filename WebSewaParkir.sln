@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSewaParkir", "WebSewaParkir\WebSewaParkir.csproj", "{F884DB49-369B-41CE-840F-61E059396BB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin", "Admin\Admin.csproj", "{1488EE3B-62C6-42CC-BD5C-9BCA18E0DD5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KandangMobil", "Admin\KandangMobil.csproj", "{1488EE3B-62C6-42CC-BD5C-9BCA18E0DD5C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{10A8886D-5F2D-4943-AFE6-FE0CC8A252BC}"
 EndProject
