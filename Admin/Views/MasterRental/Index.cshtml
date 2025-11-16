@@ -5,7 +5,7 @@
 
 
 <div class="pagetitle">
-    <h1>Dashboard</h1>
+    <h1>Dashboard Rental</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="">Home</a></li>
@@ -19,7 +19,9 @@
         <div class="col-12">
             <div class="card recent-sales overflow-auto">
                 <div class="filter">
-                    <a class="icon" asp-action="Add" asp-controller="MasterRental"><button type="button" class="btn btn-success"><i class="bx bx-list-plus me-1"></i> Add Car</button></a>
+                    <div class="icon">
+                        <a class="btn btn-success" asp-action="Add" asp-controller="MasterRental"><i class="bx bx-list-plus me-1"></i> Add Rental</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Car Rental Data</h5>

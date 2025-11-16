@@ -19,7 +19,7 @@ namespace KandangMobil.Repositories
             using var connection = _DapperDbContext.CreateConnection();
             return await connection.QueryAsync<MasterAdminModel>(sql);
         }
-        public async Task<MasterAdminModel?> Login(string email)
+        public async Task<MasterAdminModel> Login(string email)
         {
             var sql = "SELECT * FROM Admins WHERE Email = @Email";
 

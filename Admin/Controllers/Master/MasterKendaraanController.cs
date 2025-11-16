@@ -21,7 +21,7 @@ namespace KandangMobil.Controllers.Master
             return View(products);
         }
 
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
             return View();
         }

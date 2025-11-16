@@ -20,7 +20,7 @@ namespace KandangMobil.Controllers.Master
             return View(users);
         }
 
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
             return View();
         }
