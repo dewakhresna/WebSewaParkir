@@ -12,6 +12,15 @@ builder.Services.AddTransient<DapperDbContext, DapperDbContext>();
 builder.Services.AddTransient<IMasterKendaraan, MasterKendaraanRepository>();
 builder.Services.AddTransient<IMasterUser, MasterUserRepository>();
 builder.Services.AddTransient<IMasterRental, MasterRentalRepository>();
+builder.Services.AddTransient<IMasterAdmin, MasterAdminRepository>();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -29,7 +38,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

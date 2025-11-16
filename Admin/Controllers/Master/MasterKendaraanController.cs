@@ -1,9 +1,11 @@
-﻿using KandangMobil.Interfaces;
+﻿using KandangMobil.Filters;
+using KandangMobil.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.Master;
 
 namespace KandangMobil.Controllers.Master
 {
+    [AdminAuthorize]
     public class MasterKendaraanController : Controller
     {
         private readonly IMasterKendaraan _IMasterKendaraan;

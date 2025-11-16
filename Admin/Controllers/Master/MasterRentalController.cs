@@ -1,10 +1,12 @@
-﻿using KandangMobil.Interfaces;
+﻿using KandangMobil.Filters;
+using KandangMobil.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.Master;
 using System.Reflection;
 
 namespace KandangMobil.Controllers.Master
 {
+    [AdminAuthorize]
     public class MasterRentalController : Controller
     {
         private readonly IMasterRental _IMasterRental;

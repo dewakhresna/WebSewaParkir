@@ -1,10 +1,12 @@
-﻿using KandangMobil.Interfaces;
+﻿using KandangMobil.Filters;
+using KandangMobil.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.Master;
 using System.Reflection;
 
 namespace KandangMobil.Controllers.Master
 {
+    [AdminAuthorize]
     public class MasterUserController : Controller
     {
         private readonly IMasterUser _IMasterUser;
