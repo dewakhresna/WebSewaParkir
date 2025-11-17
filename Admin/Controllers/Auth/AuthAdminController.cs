@@ -1,4 +1,5 @@
-﻿using KandangMobil.Interfaces;
+﻿using KandangMobil.Helpers;
+using KandangMobil.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.Master;
 
@@ -33,7 +34,15 @@ namespace KandangMobil.Controllers.Auth
                 return View("Index");
             }
 
-            if (password != admin.Password)
+            string hashedInputPassword = HashHelper.ToSha256(password);
+
+            //if (password != admin.Password)
+            //{
+            //    ViewBag.Error = "Password salah!";
+            //    return View("Index");
+            //}
+
+            if (hashedInputPassword != admin.Password)
             {
                 ViewBag.Error = "Password salah!";
                 return View("Index");

@@ -35,9 +35,9 @@ namespace KandangMobil.Repositories
         public async Task<MasterAdminModel> UpdateProfile(MasterAdminModel model)
         {
             var sql = $@"UPDATE Admins
-                           SET [Name] = @Name,
+                           SET [Username] = @Username,
                                [Email] = @Email,
-                               [Photo] = @Photo,
+                               [Photo] = @Photo
                           WHERE
                               Id=@Id";
 
@@ -48,9 +48,8 @@ namespace KandangMobil.Repositories
         public async Task<MasterAdminModel> UpdatePassword(MasterAdminModel model)
         {
             var sql = $@"UPDATE Admins
-                           SET [Password] = @Password,
-                          WHERE
-                              Id=@Id";
+                           SET [Password] = @Password
+                          WHERE Id= @Id";
 
             using var connection = _DapperDbContext.CreateConnection();
             await connection.ExecuteAsync(sql, model);

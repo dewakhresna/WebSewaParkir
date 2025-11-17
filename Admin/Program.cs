@@ -1,4 +1,5 @@
 using KandangMobil.DBContext;
+using KandangMobil.Helpers;
 using KandangMobil.Interfaces;
 using KandangMobil.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ builder.Services.AddTransient<IMasterKendaraan, MasterKendaraanRepository>();
 builder.Services.AddTransient<IMasterUser, MasterUserRepository>();
 builder.Services.AddTransient<IMasterRental, MasterRentalRepository>();
 builder.Services.AddTransient<IMasterAdmin, MasterAdminRepository>();
+builder.Services.AddScoped<UploadHelper>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

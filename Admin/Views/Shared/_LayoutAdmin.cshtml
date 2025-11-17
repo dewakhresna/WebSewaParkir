@@ -34,7 +34,7 @@
 
 <body>
     <!-- Header -->
-    @await Html.PartialAsync("Layouts/AdminTemplate/_Header")
+    @await Component.InvokeAsync("AdminHeader")
 
     <!-- Sidebar -->
     @await Html.PartialAsync("Layouts/AdminTemplate/_Sidebar")

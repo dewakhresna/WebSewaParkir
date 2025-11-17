@@ -36,7 +36,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="profile-edit">
 
-                        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <form asp-action="EditProfile" method="post" enctype="multipart/form-data">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                             <!-- Photo -->
@@ -45,22 +45,22 @@
                                 <div class="col-sm-10">
 
                                     <div class="d-flex align-items-center mb-2">
-                                        <img src=""
+                                        <img src="/uploads/admin/profile/@Model.Photo"
                                              id="profilePreview"
                                              width="100"
                                              height="100"
                                              class="rounded-circle border me-3" />
 
                                         <div>
-                                            <input type="file"
-                                                   name="photo"
-                                                   id="photoInput"
+                                            <input asp-for="Photo" 
+                                                   type="file"
+                                                   id="profileImage"
                                                    class="form-control d-none"
                                                    accept="image/*">
                                             <button type="button"
                                                     class="btn btn-outline-primary btn-sm"
-                                                    onclick="document.getElementById('photoInput').click()">
-                                                Upload Photo
+                                                    onclick="document.getElementById('profileImage').click()">
+                                                <i class="bi bi-upload me-1"></i> Upload Photo
                                             </button>
                                         </div>
                                     </div>
@@ -97,31 +97,34 @@
                     </div>
 
                     <div class="tab-pane fade" id="profile-password">
-                        <form asp-action="ChangePassword" method="post">
+                        <form asp-action="EditPassword" method="post">
 
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                             <!-- Current Password -->
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Current Password</label>
+                                <label asp-for="CurrentPassword" class="col-sm-2 col-form-label">Current Password</label>
                                 <div class="col-sm-10">
-                                    <input name="current_password" type="password" class="form-control" required />
+                                    <input asp-for="CurrentPassword" type="password" class="form-control" required />
+                                    <span asp-validation-for="CurrentPassword" class="text-danger"></span>
                                 </div>
                             </div>
 
                             <!-- New Password -->
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">New Password</label>
+                                <label asp-for="NewPassword" class="col-sm-2 col-form-label">New Password</label>
                                 <div class="col-sm-10">
-                                    <input name="new_password" type="password" class="form-control" required />
+                                    <input asp-for="NewPassword" type="password" class="form-control" required />
+                                    <span asp-validation-for="NewPassword" class="text-danger"></span>
                                 </div>
                             </div>
 
                             <!-- Confirm Password -->
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Confirm Password</label>
+                                <label asp-for="ConfirmPassword" class="col-sm-2 col-form-label">Confirm Password</label>
                                 <div class="col-sm-10">
-                                    <input name="new_password_confirmation" type="password" class="form-control" required />
+                                    <input asp-for="ConfirmPassword" type="password" class="form-control" required />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                 </div>
                             </div>
 

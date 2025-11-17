@@ -13,5 +13,9 @@ namespace Models.Master
         public string? Email { get; set; }
         public string? Photo { get; set; }
         public string? Password { get; set; }
+
+        public string? CurrentPassword { get; set; }
+        public string? NewPassword { get; set; }
+        public string? ConfirmPassword { get; set; }
     }
 }
