@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Rental";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<div class="pagetitle">
+    <h1>Rental</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active">Rental</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+                <div class="filter">
+                    <div class="icon">
+                        <a class="btn btn-success" asp-action="Add" asp-controller="UserRental"><i class="bx bx-list-plus me-1"></i> Add Your Car</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Car Rental Data</h5>
+
+                    <table class="table table-borderless datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Customer Name</th>
+                                <th scope="col">No Police</th>
+                                <th scope="col">Car Name</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><a href="#">1</a></th>
+                                <td>John Doe</td>
+                                <td>AB123CD</td>
+                                <td>Toyota Avanza</td>
+                                <td>01 January 2024</td>
+                                <td>05 January 2024</td>
+                                <td>
+                                    <a href="#" class="btn badge bg-warning">Edit</a>
+                                    <a href="#" class="btn badge bg-danger" onclick="return confirm('Yakin ingin menghapus?')">Delete</a>
+                                </td>
+                            </tr>
+
+                            @* @{
+                                int no = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th scope="row"><a href="#">@no</a></th>
+                                        <td>@item.CustomerName</td>
+                                        <td>@item.NoPolice</td>
+                                        <td>@item.CarName</td>
+                                        <td>@item.StartDate.ToString("dd MMMM yyyy")</td>
+                                        <td>@item.EndDate.ToString("dd MMMM yyyy")</td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn badge bg-warning">Edit</a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn badge bg-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                    no++;
+                                }
+                            } *@
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- End Recent Sales -->
+    </div>
+</section>

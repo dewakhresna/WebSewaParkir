@@ -44,8 +44,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseSession();
 
+
+app.MapControllerRoute(
+    name: "admin_login",
+    pattern: "admin/login",
+    defaults: new { controller = "AuthAdmin", action = "Index" }
+);
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=AuthUser}/{action=Index}/{id?}");
 
 app.Run();

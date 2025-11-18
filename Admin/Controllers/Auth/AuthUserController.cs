@@ -1,24 +1,23 @@
 ﻿using KandangMobil.Helpers;
 using KandangMobil.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Models.Master;
 
 namespace KandangMobil.Controllers.Auth
 {
-    public class AuthAdminController : Controller
+    public class AuthUserController : Controller
     {
-        private readonly IMasterAdmin _IMasterAdmin;
-        public AuthAdminController(IMasterAdmin iMasterAdmin)
-        {
-            _IMasterAdmin = iMasterAdmin;
-        }
+        private readonly IMasterUser _IMasterUser;
 
+        public AuthUserController(IMasterUser iMasterUser)
+        {
+            _IMasterUser = iMasterUser;
+        }
         [HttpGet]
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetInt32("AdminId") != null)
+            if (HttpContext.Session.GetInt32("UserId") != null)
             {
-                return RedirectToAction("Index", "MasterRental");
+                return RedirectToAction("Index", "UserRental");
             }
             return View();
         }
@@ -26,9 +25,9 @@ namespace KandangMobil.Controllers.Auth
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            var admin = await _IMasterAdmin.Login(email);
+            var user = await _IMasterUser.Login(email);
 
-            if (admin == null)
+            if (user == null)
             {
                 ViewBag.Error = "Email tidak ditemukan!";
                 return View("Index");
@@ -36,15 +35,15 @@ namespace KandangMobil.Controllers.Auth
 
             string hashedInputPassword = HashHelper.ToSha256(password);
 
-            if (hashedInputPassword != admin.Password)
+            if (hashedInputPassword != user.Password)
             {
                 ViewBag.Error = "Password salah!";
                 return View("Index");
             }
 
-            HttpContext.Session.SetInt32("AdminId", admin.Id);
+            HttpContext.Session.SetInt32("UserId", user.Id);
 
-            return RedirectToAction("Index", "MasterRental");
+            return RedirectToAction("Index", "UserRental");
         }
 
         public IActionResult Logout()
@@ -52,5 +51,6 @@ namespace KandangMobil.Controllers.Auth
             HttpContext.Session.Clear();
             return RedirectToAction("Index");
         }
+
     }
 }

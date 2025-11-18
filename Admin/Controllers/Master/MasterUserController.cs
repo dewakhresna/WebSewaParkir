@@ -1,4 +1,5 @@
 ﻿using KandangMobil.Filters;
+using KandangMobil.Helpers;
 using KandangMobil.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.Master;
@@ -32,6 +33,9 @@ namespace KandangMobil.Controllers.Master
             {
                 return View(data);
             }
+
+            data.Password = HashHelper.ToSha256(data.Password);
+
             await _IMasterUser.Add(data);
             return RedirectToAction("Index");
         }
@@ -55,6 +59,10 @@ namespace KandangMobil.Controllers.Master
             if (string.IsNullOrWhiteSpace(data.Password))
             {
                 data.Password = existingUser.Password;
+            }
+            else
+            {
+                data.Password = HashHelper.ToSha256(data.Password);
             }
 
             await _IMasterUser.Update(data);

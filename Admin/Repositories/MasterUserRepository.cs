@@ -19,6 +19,13 @@ namespace KandangMobil.Repositories
             using var connection = _DapperDbContext.CreateConnection();
             return await connection.QueryAsync<MasterUserModel>(sql);
         }
+        public async Task<MasterUserModel> Login(string email)
+        {
+            var sql = "SELECT * FROM Users WHERE Email = @Email";
+
+            using var connection = _DapperDbContext.CreateConnection();
+            return await connection.QueryFirstOrDefaultAsync<MasterUserModel>(sql, new { Email = email });
+        }
         public async Task<MasterUserModel> Find(int Id)
         {
             var sql = "SELECT * FROM Users WHERE Id = @Id";
