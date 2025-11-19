@@ -1,16 +1,16 @@
 ﻿@model Models.Master.MasterKendaraanModel
 
 @{
-    ViewData["Title"] = "Add Car";
+    ViewData["Title"] = "Edit Car";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="pagetitle">
-    <h1>Add Car</h1>
+    <h1>Edit Car</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a asp-action="Index" asp-controller="MasterKendaraan">Home</a></li>
-            <li class="breadcrumb-item active">Add Car</li>
+            <li class="breadcrumb-item active">Edit Car</li>
         </ol>
     </nav>
 </div>
@@ -19,9 +19,9 @@
     <div class="row">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Add Car</h5>
+                <h5 class="card-title">Edit Car</h5>
 
-                <form asp-action="Add" method="post">
+                <form asp-action="Edit" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="row mb-3">
@@ -42,7 +42,7 @@
 
                     <div class="row mb-3">
                         <div class="col-sm-10 offset-sm-2">
-                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <input type="submit" value="Edit" class="btn btn-primary" />
                         </div>
                     </div>
 
@@ -52,3 +52,4 @@
         </div>
     </div>
 </section>
+

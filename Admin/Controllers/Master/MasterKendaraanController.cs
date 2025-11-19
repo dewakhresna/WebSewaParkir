@@ -29,8 +29,40 @@ namespace KandangMobil.Controllers.Master
         [HttpPost]
         public async Task<IActionResult> Add(MasterKendaraanModel data)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(data);
+            }
             await _IMasterKendaraan.Add(data);
-            return View();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var products = await _IMasterKendaraan.Find(id);
+            return View(products);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MasterKendaraanModel data)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(data);
+            }
+            await _IMasterKendaraan.Update(data);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var products = await _IMasterKendaraan.Find(id);
+            if (products != null)
+            {
+                await _IMasterKendaraan.Remove(products);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

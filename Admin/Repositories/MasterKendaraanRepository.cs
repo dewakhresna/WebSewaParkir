@@ -23,16 +23,16 @@ namespace KandangMobil.Repositories
             using var connection = _DapperDbContext.CreateConnection();
             return await connection.QueryAsync<MasterKendaraanModel>(sql);
         }
-        public async Task<MasterKendaraanModel> Find(Guid uid)
+        public async Task<MasterKendaraanModel> Find(int Id)
         {
             var sql = $@"SELECT *
                             FROM
                                MasterKendaraan
                             WHERE
-                              [Id]=@uid";
+                              Id = @Id";
 
             using var connection = _DapperDbContext.CreateConnection();
-            return await connection.QueryFirstOrDefaultAsync<MasterKendaraanModel>(sql, new { uid });
+            return await connection.QueryFirstOrDefaultAsync<MasterKendaraanModel>(sql, new { Id });
         }
         public async Task<MasterKendaraanModel> Add(MasterKendaraanModel model)
         {
@@ -65,7 +65,7 @@ namespace KandangMobil.Repositories
                         DELETE FROM
                             MasterKendaraan
                         WHERE
-                            [Id]=@Id";
+                            Id = @Id";
             using var connection = _DapperDbContext.CreateConnection();
             await connection.ExecuteAsync(sql, model);
             return model;

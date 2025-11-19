@@ -58,9 +58,9 @@ namespace KandangMobil.Controllers.Master
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int Id)
         {
-            var rentals = await _IMasterRental.Find(id);
+            var rentals = await _IMasterRental.Find(Id);
             if (rentals != null)
             {
                 await _IMasterRental.Remove(rentals);
