@@ -14,7 +14,9 @@ builder.Services.AddTransient<IMasterKendaraan, MasterKendaraanRepository>();
 builder.Services.AddTransient<IMasterUser, MasterUserRepository>();
 builder.Services.AddTransient<IMasterRental, MasterRentalRepository>();
 builder.Services.AddTransient<IMasterAdmin, MasterAdminRepository>();
+builder.Services.AddTransient<IMasterSubscriptions, MasterSubscriptionsRepository>();
 builder.Services.AddScoped<UploadHelper>();
+builder.Services.AddTransient<IMasterParkirSlot, MasterParkirSlotRepository>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

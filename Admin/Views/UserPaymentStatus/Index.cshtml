@@ -1,0 +1,60 @@
+﻿@model Models.Master.MasterSubscriptionsModel
+
+@{
+    ViewData["Title"] = "Payment Status";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<div class="pagetitle">
+    <h1>Payment Status</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active">Payment Status</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+                @* <div class="filter">
+                    <div class="icon">
+                        <a class="btn btn-success" asp-action="" asp-controller=""><i class="bx bx-list-plus me-1"></i> Add Your Car</a>
+                    </div>
+                </div> *@
+                <div class="card-body">
+                    <h5 class="card-title">Payment Status</h5>
+
+                    <table class="table table-borderless datatable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Car Name</th>
+                                <th scope="col">No Police</th>
+                                <th scope="col">Parkir Slot</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@ViewBag.Car.CarName</td>
+                                <td>@ViewBag.Car.NoPolice</td>
+                                <td>@ViewBag.ParkirSLot.SlotNumber</td>
+                                <td>@Model.LastPaymentDate</td>
+                                <td>@Model.EndDate</td>
+                                <td>
+                                     <a asp-action="" asp-route-id="" class="btn badge bg-warning">Edit</a>
+                                     <a asp-action="" asp-route-id="" class="btn badge bg-danger">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -17,9 +17,10 @@ namespace KandangMobil.Controllers.User
             _IMasterKendaraan = iMasterKendaraan;
             _IMasterUser = iMasterUser;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var rentals = await _IMasterRental.Get();
+            return View(rentals);
         }
         public async Task<IActionResult> Add()
         {
