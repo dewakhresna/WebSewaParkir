@@ -1,0 +1,132 @@
+﻿@model Models.Master.MasterSubscriptionsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="modal fade" id="paymentProofModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bukti Pembayaran</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="/uploads/user/paymentproof/@Model.PaymentProof"
+                     class="img-fluid rounded"
+                     alt="Bukti Pembayaran"
+                     style="max-height: 70vh;">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white border-bottom">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">Payment Details</h4>
+                        <span class="@{@Model.StatusInfo} text-capitalize">
+                            @Model.StatusText
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="border-bottom">
+                        <div class="mt-3">
+                            <h5 class="mb-3"><i class="bx bxs-user me-2"></i>Personal Data</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <p class="mb-1 text-muted">Name</p>
+                                    <p class="fw-bold">@ViewBag.User.Name</p>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <p class="mb-1 text-muted">Phone</p>
+                                    <p class="fw-bold">@ViewBag.User.Telp</p>
+                                </div>
+                                <div class="col-12 mb-2">
+                                    <p class="mb-1 text-muted">Email</p>
+                                    <p class="fw-bold">@ViewBag.User.Email</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-bottom">
+                        <div class="mb-1 mt-3">
+                            <h5 class="mb-3"><i class="bx bxs-car me-2"></i>Car Information</h5>
+                            <div class="row g-0">
+                                <div class="col-12">
+                                    <h6 class="mb-1">Your Car: </h6>
+                                    <p class="fw-bold">@ViewBag.Rental.CarName</p>
+
+                                    <h6 class="mb-1">Merek: </h6>
+                                    <p class="fw-bold">@ViewBag.Rental.CarName</p>
+
+                                    <h6 class="mb-1">No Police: </h6>
+                                    <p class="fw-bold">@ViewBag.Rental.NoPolice</p>
+
+                                    <h6 class="mb-1">End Date: </h6>
+                                    <p class="fw-bold">@Model.EndDate</p>
+
+                                    <h6 class="mb-1">Last Payment Date: </h6>
+                                    <p class="fw-bold">@Model.LastPaymentDate</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informasi Pembayaran -->
+                    <div class="mt-3">
+                        <h5 class="mb-3"><i class="bi bi-credit-card me-2"></i>Informasi Pembayaran</h5>
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <p class="mb-1 text-muted">Metode Pembayaran</p>
+                                <p class="fw-bold">@Model.PaymentMethod</p>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <p class="mb-1 text-muted">Total Pembayaran</p>
+                                <p class="fw-bold">@Model.PriceFormatted</p>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <p class="mb-1 text-muted">Bukti Pembayaran</p>
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentProofModal">
+                                    <i class="bi bi-file-earmark-image me-1"></i> Lihat Bukti Pembayaran
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div class="col-lg-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="mb-0">Ubah Status Pesanan</h5>
+                </div>
+                <div class="card-body mt-2">
+                    <form asp-action="ConfirmTransaction" method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="Status" class="col-sm-2 col-form-label">Status</label>
+                            <select asp-for="Status" class="form-select" required>
+                                <option value="1">Pembayaran Sedang Dalam Proses</option>
+                                <option value="2">Pembayaran Berhasil</option>
+                                <option value="0">Pembayaran Gagal</option>
+                            </select>
+                        </div>
+                            <button type="submit" class="btn btn-primary w-100 mt-3">
+                                <i class="bi bi-save me-1"></i> Simpan Perubahan
+                            </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

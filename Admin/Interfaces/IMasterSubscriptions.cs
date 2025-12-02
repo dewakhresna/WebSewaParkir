@@ -6,8 +6,10 @@ namespace KandangMobil.Interfaces
     {
         Task<IEnumerable<MasterSubscriptionsModel>> Get();
         Task<MasterSubscriptionsModel> Find(int Id);
+        Task<List<MasterSubscriptionsModel>> FindByUser(int UserId);
         Task<MasterSubscriptionsModel> Add(MasterSubscriptionsModel model);
         Task<MasterSubscriptionsModel> Update(MasterSubscriptionsModel model);
+        Task<MasterSubscriptionsModel> ConfirmTransaction(MasterSubscriptionsModel model);
         Task<MasterSubscriptionsModel> Remove(MasterSubscriptionsModel model);
     }
 }

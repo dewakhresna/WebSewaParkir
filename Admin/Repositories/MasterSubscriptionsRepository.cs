@@ -21,9 +21,16 @@ namespace KandangMobil.Repositories
 
         public async Task<MasterSubscriptionsModel> Find(int Id)
         {
-            var sql = "SELECT * FROM MasterSubscriptions WHERE UserId = @Id";
+            var sql = "SELECT * FROM MasterSubscriptions WHERE Id = @Id";
             using var connection = _DapperDbContext.CreateConnection();
             return await connection.QueryFirstOrDefaultAsync<MasterSubscriptionsModel>(sql, new { Id });
+        }
+        public async Task<List<MasterSubscriptionsModel>> FindByUser(int UserId)
+        {
+            var sql = "SELECT * FROM MasterSubscriptions WHERE UserId = @UserId";
+            using var connection = _DapperDbContext.CreateConnection();
+            var result = await connection.QueryAsync<MasterSubscriptionsModel>(sql, new { UserId });
+            return result.ToList();
         }
 
         public async Task<MasterSubscriptionsModel> Add(MasterSubscriptionsModel model)
@@ -51,6 +58,15 @@ namespace KandangMobil.Repositories
                                [Status] = @Status
                           WHERE
                               Id=@Id";
+            using var connection = _DapperDbContext.CreateConnection();
+            await connection.ExecuteAsync(sql, model);
+            return model;
+        }
+        public async Task<MasterSubscriptionsModel> ConfirmTransaction(MasterSubscriptionsModel model)
+        {
+            var sql = $@"UPDATE MasterSubscriptions
+                           SET [Status] = @Status
+                          WHERE Id=@Id";
             using var connection = _DapperDbContext.CreateConnection();
             await connection.ExecuteAsync(sql, model);
             return model;

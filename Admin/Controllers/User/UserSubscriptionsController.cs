@@ -11,19 +11,22 @@ namespace KandangMobil.Controllers.User
         private readonly IMasterKendaraan _IMasterKendaraan;
         private readonly IMasterUser _IMasterUser;
         private readonly IMasterSubscriptions _IMasterSubscriptions;
+        private readonly IMasterPrice _IMasterPrice;
         private readonly UploadHelper _upload;
-        public UserSubscriptionsController( IMasterRental iMasterRental, IMasterKendaraan iMasterKendaraan, IMasterUser iMasterUser, IMasterSubscriptions iMasterSubscriptions, UploadHelper upload)
+        public UserSubscriptionsController( IMasterRental iMasterRental, IMasterKendaraan iMasterKendaraan, IMasterUser iMasterUser, IMasterSubscriptions iMasterSubscriptions, IMasterPrice iMasterPrice, UploadHelper upload)
         {
             _IMasterRental = iMasterRental;
             _IMasterKendaraan = iMasterKendaraan;
             _IMasterUser = iMasterUser;
             _IMasterSubscriptions = iMasterSubscriptions;
+            _IMasterPrice = iMasterPrice;
             _upload = upload;
         }
         [HttpGet]
         public async Task<IActionResult> Index(int Id)
         {
             ViewBag.Rental = await _IMasterRental.Find(Id);
+            ViewBag.Price = await _IMasterPrice.Get();
             return View();
         }
         //[HttpPost]

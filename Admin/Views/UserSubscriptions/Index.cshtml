@@ -13,7 +13,7 @@
             <div class="col-lg-12">
                 <div class="card shadow-sm mb-4">
                     <div class="card-header bg-white border-bottom">
-                        <h4 class="mb-0"><i class="bi bi-truck me-2"></i>Informasi Pesanan</h4>
+                        <h4 class="mb-0"><i class="bi bi-truck me-2"></i>Payment Form</h4>
                     </div>
                     <div class="card-body">
                         <div class="border-top pt-3">
@@ -61,11 +61,12 @@
                                             <div class="card-body">      
                                                 <label class="col-sm-2 col-form-label">Sewa /Month</label>
                                                 <div class="col-sm-12">
-                                                    <select class="form-select" aria-label="Default select example" name="Time" required>
+                                                    <select id="duration-select" asp-for="Time" class="form-select" aria-label="Default select example" required>
                                                         <option selected>Select Month</option>
-                                                        <option value="1" >1 Bulan</option>
-                                                        <option value="2" >2 Bulan</option>
-                                                        <option value="3" >3 Bulan</option>
+                                                        @foreach (var item in ViewBag.Price)
+                                                        {   
+                                                            <option value="@item.Duration" data-price="@item.Price">@item.Description</option>
+                                                        }
                                                     </select>
                                                 </div>
                                             </div>
@@ -84,7 +85,7 @@
                                                id="method-dana" value="Dana" required>
                                         <label class="form-check-label" for="method-dana">
                                             <div class="d-flex align-items-center">
-                                                <img src="#" class="me-2" width="55">
+                                                <img src="/images/DANA.png" class="me-2" width="55">
                                                 <div>
                                                     <h6 class="mb-0">Dana</h6>
                                                     <small class="text-muted">0812-3434-5678 a.n. Static Pleasure</small>
@@ -99,7 +100,7 @@
                                                id="method-bank-bca" value="Bank BCA" required>
                                         <label class="form-check-label" for="method-bank-bca">
                                             <div class="d-flex align-items-center">
-                                                <img src="#" class="me-2" width="70">
+                                                <img src="/images/Bank-BCA.png" class="me-2" width="70">
                                                 <div>
                                                     <h6 class="mb-0">Transfer Bank BCA</h6>
                                                     <small class="text-muted">377892536 a.n. Static Pleasure</small>
@@ -114,7 +115,7 @@
                                                id="method-GoPay" value="GoPay" required>
                                         <label class="form-check-label" for="method-GoPay">
                                             <div class="d-flex align-items-center">
-                                                <img src="#" class="me-2" width="55">
+                                                <img src="/images/GoPay.png" class="me-2" width="55">
                                                 <div>
                                                     <h6 class="mb-0">Go Pay</h6>
                                                     <small class="text-muted">0812-3434-5678 a.n. Static Pleasure</small>
@@ -129,7 +130,7 @@
                                                id="method-ShoppePay" value="ShoppePay" required>
                                         <label class="form-check-label" for="method-ShoppePay">
                                             <div class="d-flex align-items-center">
-                                                <img src="#" class="me-2" width="55">
+                                                <img src="/images/ShopeePay.png" class="me-2" width="55">
                                                 <div>
                                                     <h6 class="mb-0">Shoppe Pay</h6>
                                                     <small class="text-muted">0812-3434-5678 a.n. Static Pleasure</small>

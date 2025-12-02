@@ -17,6 +17,7 @@ builder.Services.AddTransient<IMasterAdmin, MasterAdminRepository>();
 builder.Services.AddTransient<IMasterSubscriptions, MasterSubscriptionsRepository>();
 builder.Services.AddScoped<UploadHelper>();
 builder.Services.AddTransient<IMasterParkirSlot, MasterParkirSlotRepository>();
+builder.Services.AddTransient<IMasterPrice, MasterPriceRepository>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

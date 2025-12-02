@@ -443,3 +443,26 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+
+document.getElementById("duration-select").addEventListener("change", function () {
+    let selectedOption = this.options[this.selectedIndex];
+    let price = selectedOption.getAttribute("data-price");
+
+    if (price) {
+        // Format harga ke Rupiah
+        let formatted = new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR"
+        }).format(price);
+
+        // Tampilkan ke UI
+        document.getElementById("grand-total").innerText = formatted;
+
+        // Isi input hidden
+        document.getElementById("Price").value = price;
+    } else {
+        document.getElementById("grand-total").innerText = "Rp 0";
+        document.getElementById("Price").value = 0;
+    }
+});
+

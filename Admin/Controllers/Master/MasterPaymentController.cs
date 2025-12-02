@@ -3,9 +3,9 @@ using KandangMobil.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.Master;
 
-namespace KandangMobil.Controllers.User
+namespace KandangMobil.Controllers.Master
 {
-    public class UserPaymentStatusController : Controller
+    public class MasterPaymentController : Controller
     {
         private readonly IMasterRental _IMasterRental;
         private readonly IMasterKendaraan _IMasterKendaraan;
@@ -13,7 +13,7 @@ namespace KandangMobil.Controllers.User
         private readonly IMasterSubscriptions _IMasterSubscriptions;
         private readonly IMasterParkirSlot _IMasterParkirSlot;
         private readonly UploadHelper _upload;
-        public UserPaymentStatusController( IMasterRental iMasterRental, IMasterKendaraan iMasterKendaraan, IMasterUser iMasterUser, IMasterSubscriptions iMasterSubscriptions, IMasterParkirSlot iMasterParkirSlot, UploadHelper upload)
+        public MasterPaymentController( IMasterRental iMasterRental, IMasterKendaraan iMasterKendaraan, IMasterUser iMasterUser, IMasterSubscriptions iMasterSubscriptions, IMasterParkirSlot iMasterParkirSlot, UploadHelper upload)
         {
             _IMasterRental = iMasterRental;
             _IMasterKendaraan = iMasterKendaraan;
@@ -22,15 +22,13 @@ namespace KandangMobil.Controllers.User
             _upload = upload;
             _IMasterParkirSlot = iMasterParkirSlot;
         }
-        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            int? userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-                return RedirectToAction("Index", "AuthUser");
+            int? adminId = HttpContext.Session.GetInt32("AdminId");
+            if (adminId == null)
+                return RedirectToAction("Index", "AuthAdmin");
 
-            var payments = await _IMasterSubscriptions.FindByUser(userId.Value);
-
+            var payments = await _IMasterSubscriptions.Get();
             foreach (var p in payments)
             {
                 p.Car = await _IMasterRental.Find(p.CarRentalId);
@@ -39,16 +37,22 @@ namespace KandangMobil.Controllers.User
 
             return View(payments);
         }
-
+        [HttpGet]
         public async Task<IActionResult> Details(int Id)
         {
-            int? userId = HttpContext.Session.GetInt32("UserId");
-            if (userId == null)
-                return RedirectToAction("Index", "AuthUser");
+            int? adminId = HttpContext.Session.GetInt32("AdminId");
+            if (adminId == null)
+                return RedirectToAction("Index", "AuthAdmin");
             var payments = await _IMasterSubscriptions.Find(Id);
-            ViewBag.User = await _IMasterUser.Find(userId.Value);
+            ViewBag.User = await _IMasterUser.Find(payments.UserId);
             ViewBag.Rental = await _IMasterRental.Find(payments.CarRentalId);
             return View(payments);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ConfirmTransaction(MasterSubscriptionsModel data)
+        {
+            await _IMasterSubscriptions.ConfirmTransaction(data);
+            return RedirectToAction("Index");
         }
     }
 }
