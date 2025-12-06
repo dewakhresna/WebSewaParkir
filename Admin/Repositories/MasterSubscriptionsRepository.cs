@@ -62,14 +62,18 @@ namespace KandangMobil.Repositories
             await connection.ExecuteAsync(sql, model);
             return model;
         }
-        public async Task<MasterSubscriptionsModel> ConfirmTransaction(MasterSubscriptionsModel model)
+        public async Task ConfirmTransaction(int id, int status)
         {
-            var sql = $@"UPDATE MasterSubscriptions
-                           SET [Status] = @Status
-                          WHERE Id=@Id";
+            var sql = @"UPDATE MasterSubscriptions
+                SET [Status] = @Status
+                WHERE Id = @Id";
+
             using var connection = _DapperDbContext.CreateConnection();
-            await connection.ExecuteAsync(sql, model);
-            return model;
+            await connection.ExecuteAsync(sql, new
+            {
+                Id = id,
+                Status = status
+            });
         }
 
         public async Task<MasterSubscriptionsModel> Remove(MasterSubscriptionsModel model)

@@ -32,6 +32,7 @@ namespace KandangMobil.Controllers.Master
             foreach (var p in payments)
             {
                 p.Car = await _IMasterRental.Find(p.CarRentalId);
+                p.Car.Kendaraan = await _IMasterKendaraan.Find(p.Car.IdKendaraan);
                 p.ParkirSlot = await _IMasterParkirSlot.Find(p.ParkirSlotId);
             }
 
@@ -43,15 +44,25 @@ namespace KandangMobil.Controllers.Master
             int? adminId = HttpContext.Session.GetInt32("AdminId");
             if (adminId == null)
                 return RedirectToAction("Index", "AuthAdmin");
-            var payments = await _IMasterSubscriptions.Find(Id);
-            ViewBag.User = await _IMasterUser.Find(payments.UserId);
-            ViewBag.Rental = await _IMasterRental.Find(payments.CarRentalId);
-            return View(payments);
+            var payment = await _IMasterSubscriptions.Find(Id);
+            var rental = await _IMasterRental.Find(payment.CarRentalId);
+            var kendaraan = await _IMasterKendaraan.Find(rental.IdKendaraan);
+            var user = await _IMasterUser.Find(payment.UserId);
+
+            var vm = new PaymentDetailViewModel
+            {
+                Payment = payment,
+                Rental = rental,
+                Kendaraan = kendaraan,
+                User = user
+            };
+
+            return View(vm);
         }
         [HttpPost]
-        public async Task<IActionResult> ConfirmTransaction(MasterSubscriptionsModel data)
+        public async Task<IActionResult> ConfirmTransaction(PaymentDetailViewModel model)
         {
-            await _IMasterSubscriptions.ConfirmTransaction(data);
+            await _IMasterSubscriptions.ConfirmTransaction(model.Payment.Id, model.Payment.Status);
             return RedirectToAction("Index");
         }
     }

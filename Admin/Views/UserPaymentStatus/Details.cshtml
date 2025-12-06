@@ -1,4 +1,4 @@
-﻿@model Models.Master.MasterSubscriptionsModel
+﻿@model Models.Master.PaymentDetailViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -13,7 +13,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img src="/uploads/user/paymentproof/@Model.PaymentProof"
+                    <img src="/uploads/user/paymentproof/@Model.Payment.PaymentProof"
                              class="img-fluid rounded" 
                                 alt="Bukti Pembayaran"
                                 style="max-height: 70vh;">
@@ -30,8 +30,8 @@
                     <div class="card-header bg-white border-bottom">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="mb-0">Payment Details</h4>
-                            <span class="@{@Model.StatusInfo} text-capitalize">
-                                @Model.StatusText
+                            <span class="@{@Model.Payment.StatusInfo} text-capitalize">
+                                @Model.Payment.StatusText
                             </span>
                         </div>
                     </div>
@@ -42,15 +42,15 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
                                         <p class="mb-1 text-muted">Name</p>
-                                        <p class="fw-bold">@ViewBag.User.Name</p>
+                                        <p class="fw-bold">@Model.User.Name</p>
                                     </div>
                                     <div class="col-md-6 mb-2">
                                         <p class="mb-1 text-muted">Phone</p>
-                                    <p class="fw-bold">@ViewBag.User.Telp</p>
+                                    <p class="fw-bold">@Model.User.Telp</p>
                                     </div>
                                     <div class="col-12 mb-2">
                                         <p class="mb-1 text-muted">Email</p>
-                                    <p class="fw-bold">@ViewBag.User.Email</p>
+                                    <p class="fw-bold">@Model.User.Email</p>
                                     </div>
                                 </div>
                             </div>
@@ -62,19 +62,19 @@
                                 <div class="row g-0">
                                     <div class="col-12">
                                         <h6 class="mb-1">Your Car: </h6>
-                                        <p class="fw-bold">@ViewBag.Rental.CarName</p>
+                                        <p class="fw-bold">@Model.Kendaraan.Tipe</p>
 
                                         <h6 class="mb-1">Merek: </h6>
-                                        <p class="fw-bold">@ViewBag.Rental.CarName</p>
+                                        <p class="fw-bold">@Model.Kendaraan.Merek</p>
 
                                         <h6 class="mb-1">No Police: </h6>
-                                        <p class="fw-bold">@ViewBag.Rental.NoPolice</p>
+                                        <p class="fw-bold">@Model.Rental.NoPolice</p>
 
                                         <h6 class="mb-1">End Date: </h6>
-                                        <p class="fw-bold">@Model.EndDate</p>
+                                        <p class="fw-bold">@Model.Payment.EndDate</p>
 
                                         <h6 class="mb-1">Last Payment Date: </h6>
-                                        <p class="fw-bold">@Model.LastPaymentDate</p>
+                                    <p class="fw-bold">@Model.Payment.LastPaymentDate</p>
                                      </div>
                                 </div>
                             </div>
@@ -85,11 +85,11 @@
                             <div class="row">
                                 <div class="col-md-12 mb-2">
                                     <p class="mb-1 text-muted">Metode Pembayaran</p>
-                                    <p class="fw-bold">@Model.PaymentMethod</p>
+                                    <p class="fw-bold">@Model.Payment.PaymentMethod</p>
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <p class="mb-1 text-muted">Total Pembayaran</p>
-                                    <p class="fw-bold">@Model.PriceFormatted</p>
+                                    <p class="fw-bold">@Model.Payment.PriceFormatted</p>
                                 </div>
                                 <div class="col-12 mb-2">
                                     <p class="mb-1 text-muted">Bukti Pembayaran</p>

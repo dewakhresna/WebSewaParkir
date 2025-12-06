@@ -22,6 +22,7 @@ namespace Models.Master
         public int Status { get; set; }
         public MasterRentalModel Car { get; set; }
         public MasterParkirSlotModel ParkirSlot { get; set; }
+        public MasterKendaraanModel Kendaraan { get; set; }
         public string StatusText
         {
             get

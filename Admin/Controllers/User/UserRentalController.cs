@@ -19,7 +19,16 @@ namespace KandangMobil.Controllers.User
         }
         public async Task<IActionResult> Index()
         {
-            var rentals = await _IMasterRental.Get();
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Index", "AuthUser");
+
+            var rentals = await _IMasterRental.FindByUser(userId.Value);
+            foreach (var r in rentals)
+            {
+                r.Kendaraan = await _IMasterKendaraan.Find(r.IdKendaraan);
+                r.User = await _IMasterUser.Find(r.UserId);
+            }
             return View(rentals);
         }
         public async Task<IActionResult> Add()
@@ -29,15 +38,8 @@ namespace KandangMobil.Controllers.User
                 return RedirectToAction("Index", "AuthUser");
 
             var user = await _IMasterUser.Find(userId.Value);
-            var model = new MasterRentalModel
-            {
-                CustomerName = user.Name,
-                StartDate = DateTime.Now.Date,
-                EndDate = DateTime.Now.Date
-            };
-
             ViewBag.CarList = await _IMasterKendaraan.Get();
-            return View(model);
+            return View();
         }
 
         [HttpPost]
@@ -55,6 +57,7 @@ namespace KandangMobil.Controllers.User
         public async Task<IActionResult> Edit(int Id)
         {
             ViewBag.CarList = await _IMasterKendaraan.Get();
+            ViewBag.UserList = await _IMasterUser.Get();
             var rentals = await _IMasterRental.Find(Id);
             return View(rentals);
         }
@@ -67,6 +70,15 @@ namespace KandangMobil.Controllers.User
                 return View(data);
             }
             await _IMasterRental.Update(data);
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var rentals = await _IMasterRental.Find(Id);
+            if (rentals != null)
+            {
+                await _IMasterRental.Remove(rentals);
+            }
             return RedirectToAction("Index");
         }
     }

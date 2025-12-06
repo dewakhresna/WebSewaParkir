@@ -1,15 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Rental";
+    ViewData["Title"] = "Dashboard Rental";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 
 <div class="pagetitle">
-    <h1>Rental</h1>
+    <h1>Car User</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="">Home</a></li>
-            <li class="breadcrumb-item active">Rental</li>
+            <li class="breadcrumb-item active">Car User</li>
         </ol>
     </nav>
 </div>
@@ -20,7 +20,7 @@
             <div class="card recent-sales overflow-auto">
                 <div class="filter">
                     <div class="icon">
-                        <a class="btn btn-success" asp-action="Add" asp-controller="UserRental"><i class="bx bx-list-plus me-1"></i> Add Your Car</a>
+                        <a class="btn btn-success" asp-action="Add" asp-controller="MasterRental"><i class="bx bx-list-plus me-1"></i> Add Rental</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -31,6 +31,7 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Car Name</th>
+                                <th scope="col">Car Type</th>
                                 <th scope="col">No Police</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -42,10 +43,10 @@
                                 {
                                     <tr>
                                         <th scope="row"><a href="#">@no</a></th>
-                                        <td>@item.CarName</td>
+                                        <td>@item.Kendaraan.Merek</td>
+                                        <td>@item.Kendaraan.Tipe</td>
                                         <td>@item.NoPolice</td>
                                         <td>
-                                            <a asp-controller="UserSubscriptions" asp-route-id="@item.Id" asp-action="Index" class="btn badge bg-primary">Rental</a>
                                             <a asp-action="Edit" asp-route-id="@item.Id" class="btn badge bg-warning">Edit</a>
                                             <a asp-action="Delete" asp-route-id="@item.Id" class="btn badge bg-danger">Delete</a>
                                         </td>
@@ -57,6 +58,6 @@
                     </table>
                 </div>
             </div>
-        </div><!-- End Recent Sales -->
+        </div>
     </div>
 </section>

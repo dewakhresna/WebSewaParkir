@@ -34,6 +34,7 @@ namespace KandangMobil.Controllers.User
             foreach (var p in payments)
             {
                 p.Car = await _IMasterRental.Find(p.CarRentalId);
+                p.Car.Kendaraan = await _IMasterKendaraan.Find(p.Car.IdKendaraan);
                 p.ParkirSlot = await _IMasterParkirSlot.Find(p.ParkirSlotId);
             }
 
@@ -45,10 +46,21 @@ namespace KandangMobil.Controllers.User
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
                 return RedirectToAction("Index", "AuthUser");
-            var payments = await _IMasterSubscriptions.Find(Id);
-            ViewBag.User = await _IMasterUser.Find(userId.Value);
-            ViewBag.Rental = await _IMasterRental.Find(payments.CarRentalId);
-            return View(payments);
+
+            var payment = await _IMasterSubscriptions.Find(Id);
+            var rental = await _IMasterRental.Find(payment.CarRentalId);
+            var kendaraan = await _IMasterKendaraan.Find(rental.IdKendaraan);
+            var user = await _IMasterUser.Find(userId.Value);
+
+            var vm = new PaymentDetailViewModel
+            {
+                Payment = payment,
+                Rental = rental,
+                Kendaraan = kendaraan,
+                User = user
+            };
+
+            return View(vm);
         }
     }
 }

@@ -2,7 +2,6 @@
 using KandangMobil.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.Master;
-using System.Reflection;
 
 namespace KandangMobil.Controllers.Master
 {
@@ -11,23 +10,37 @@ namespace KandangMobil.Controllers.Master
     {
         private readonly IMasterRental _IMasterRental;
         private readonly IMasterKendaraan _IMasterKendaraan;
-        public MasterRentalController(IMasterRental iMasterRental, IMasterKendaraan iMasterKendaraan)
+        public readonly IMasterUser _IMasterUser;
+        public MasterRentalController(IMasterRental iMasterRental, IMasterKendaraan iMasterKendaraan, IMasterUser iMasterUser)
         {
             _IMasterRental = iMasterRental;
             _IMasterKendaraan = iMasterKendaraan;
+            _IMasterUser = iMasterUser;
         }
         public async Task<IActionResult> Index()
         {
             var rentals = await _IMasterRental.Get();
-            return View(rentals);
+            var result = new List<CarViewModel>();
+
+            foreach (var r in rentals)
+            {
+                result.Add(new CarViewModel
+                {
+                    Rental = r,
+                    User = await _IMasterUser.Find(r.UserId),
+                    Kendaraan = await _IMasterKendaraan.Find(r.IdKendaraan)
+                });
+            }
+
+            return View(result);
         }
 
         public async Task<IActionResult> Add()
         {
+            ViewBag.UserList = await _IMasterUser.Get();
             ViewBag.CarList = await _IMasterKendaraan.Get();
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Add(MasterRentalModel data)
         {
@@ -38,11 +51,11 @@ namespace KandangMobil.Controllers.Master
             await _IMasterRental.Add(data);
             return RedirectToAction("Index");
         }
-
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
             ViewBag.CarList = await _IMasterKendaraan.Get();
+            ViewBag.UserList = await _IMasterUser.Get();
             var rentals = await _IMasterRental.Find(Id);
             return View(rentals);
         }
@@ -57,7 +70,6 @@ namespace KandangMobil.Controllers.Master
             await _IMasterRental.Update(data);
             return RedirectToAction("Index");
         }
-
         public async Task<IActionResult> Delete(int Id)
         {
             var rentals = await _IMasterRental.Find(Id);
@@ -67,6 +79,5 @@ namespace KandangMobil.Controllers.Master
             }
             return RedirectToAction("Index");
         }
-
     }
 }

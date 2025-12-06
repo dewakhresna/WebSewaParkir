@@ -25,12 +25,19 @@ namespace KandangMobil.Repositories
             using var connection = _DapperDbContext.CreateConnection();
             return await connection.QueryFirstOrDefaultAsync<MasterRentalModel>(sql, new { Id });
         }
+        public async Task<List<MasterRentalModel>> FindByUser(int UserId)
+        {
+            var sql = "SELECT * FROM CarRentals WHERE UserId = @UserId";
+            using var connection = _DapperDbContext.CreateConnection();
+            var result = await connection.QueryAsync<MasterRentalModel>(sql, new { UserId });
+            return result.ToList();
+        }
 
         public async Task<MasterRentalModel> Add(MasterRentalModel model)
         {
             var sql = $@"
-                INSERT INTO CarRentals (CustomerName, NoPolice, CarName, StartDate, EndDate)
-                 VALUES (@CustomerName, @NoPolice, @CarName, @StartDate, @EndDate)";
+                INSERT INTO CarRentals (NoPolice, IdKendaraan, UserId)
+                 VALUES (@NoPolice, @IdKendaraan, @UserId)";
             using var connection = _DapperDbContext.CreateConnection();
             await connection.ExecuteAsync(sql, model);
             return model;
@@ -39,11 +46,21 @@ namespace KandangMobil.Repositories
         public async Task<MasterRentalModel> Update(MasterRentalModel model)
         {
             var sql = $@"UPDATE CarRentals
-                           SET [CustomerName] = @CustomerName,
-                               [NoPolice] = @NoPolice,
-                               [CarName] = @CarName,
-                               [StartDate] = @StartDate,
-                               [EndDate] = @EndDate
+                           SET [NoPolice] = @NoPolice,
+                               [IdKendaraan] = @IdKendaraan,
+                               [UserId] = @UserId
+                          WHERE
+                              Id=@Id";
+            using var connection = _DapperDbContext.CreateConnection();
+            await connection.ExecuteAsync(sql, model);
+            return model;
+        }
+
+        public async Task<MasterRentalModel> UpdateUser(MasterRentalModel model)
+        {
+            var sql = $@"UPDATE CarRentals
+                           SET [NoPolice] = @NoPolice,
+                               [IdKendaraan] = @IdKendaraan
                           WHERE
                               Id=@Id";
             using var connection = _DapperDbContext.CreateConnection();

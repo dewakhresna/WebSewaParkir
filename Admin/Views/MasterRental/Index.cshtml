@@ -5,11 +5,11 @@
 
 
 <div class="pagetitle">
-    <h1>Car Rental Data</h1>
+    <h1>Car User</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="">Home</a></li>
-            <li class="breadcrumb-item active">Car Rental Data</li>
+            <li class="breadcrumb-item active">Car User</li>
         </ol>
     </nav>
 </div>
@@ -31,10 +31,9 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Customer Name</th>
-                                <th scope="col">No Police</th>
                                 <th scope="col">Car Name</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
+                                <th scope="col">Car Type</th>
+                                <th scope="col">No Police</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -44,15 +43,14 @@
                                 foreach (var item in Model)
                                 {
                                     <tr>
-                                        <th scope="row"><a href="#">@no</a></th>
-                                        <td>@item.CustomerName</td>
-                                        <td>@item.NoPolice</td>
-                                        <td>@item.CarName</td>
-                                        <td>@item.StartDate.ToString("dd MMMM yyyy")</td>
-                                        <td>@item.EndDate.ToString("dd MMMM yyyy")</td>
+                                        <td>@no</td>
+                                        <td>@item.User?.Name ?? "-"</td>
+                                        <td>@item.Kendaraan?.Merek ?? "-"</td>
+                                        <td>@item.Kendaraan?.Tipe ?? "-"</td>
+                                        <td>@item.Rental?.NoPolice ?? "-"</td>
                                         <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn badge bg-warning">Edit</a>
-                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn badge bg-danger">Delete</a>
+                                            <a asp-action="Edit" asp-route-id="@item.Rental.Id" class="btn badge bg-warning">Edit</a>
+                                            <a asp-action="Delete" asp-route-id="@item.Rental.Id" class="btn badge bg-danger">Delete</a>
                                         </td>
                                     </tr>
                                     no++;

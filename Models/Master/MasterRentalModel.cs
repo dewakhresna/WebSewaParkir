@@ -9,10 +9,10 @@ namespace Models.Master
     public class MasterRentalModel
     {
         public int Id { get; set; }
-        public string? CustomerName { get; set; }
         public string? NoPolice { get; set; }
-        public string? CarName { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public int IdKendaraan { get; set; }
+        public int UserId { get; set; }
+        public MasterKendaraanModel? Kendaraan { get; set; }
+        public MasterUserModel? User { get; set; }
     }
 }

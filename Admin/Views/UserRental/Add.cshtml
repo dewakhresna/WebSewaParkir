@@ -25,10 +25,28 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="row mb-3">
-                        <label asp-for="CustomerName" class="col-sm-2 col-form-label">Your Name</label>
+                        <label asp-for="UserId" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input asp-for="CustomerName" class="form-control" required />
-                            <span asp-validation-for="CustomerName" class="text-danger"></span>
+                            <select asp-for="UserId" class="form-select" aria-label="Default select example" required>
+                                <option selected>Select User</option>
+                                @foreach (var item in ViewBag.UserList)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label asp-for="IdKendaraan" class="col-sm-2 col-form-label">Car Names</label>
+                        <div class="col-sm-10">
+                            <select asp-for="IdKendaraan" class="form-select" aria-label="Default select example" required>
+                                <option selected>Select CarName</option>
+                                @foreach (var item in ViewBag.CarList)
+                                {
+                                    <option value="@item.Id">@item.Tipe</option>
+                                }
+                            </select>
                         </div>
                     </div>
 
@@ -41,37 +59,8 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label asp-for="CarName" class="col-sm-2 col-form-label">Car Name</label>
-                        <div class="col-sm-10">
-                            <select asp-for="CarName" class="form-select" aria-label="Default select example" required>
-                                <option selected>Select CarName</option>
-                                @foreach (var item in ViewBag.CarList)
-                                {
-                                    <option value="@item.Tipe">@item.Tipe</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label asp-for="StartDate" class="col-sm-2 col-form-label">StartDate</label>
-                        <div class="col-sm-10">
-                            <input asp-for="StartDate" class="form-control" type="date" required />
-                            <span asp-validation-for="StartDate" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label asp-for="EndDate" class="col-sm-2 col-form-label">End Date</label>
-                        <div class="col-sm-10">
-                            <input asp-for="EndDate" class="form-control" type="date" required />
-                            <span asp-validation-for="EndDate" class="text-danger"></span>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
                         <div class="col-sm-10 offset-sm-2">
-                            <input type="submit" value="Add Car" class="btn btn-primary" />
+                            <input type="submit" value="Create" class="btn btn-primary" />
                         </div>
                     </div>
 
