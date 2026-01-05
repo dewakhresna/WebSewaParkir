@@ -25,19 +25,6 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="row mb-3">
-                        <label asp-for="UserId" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
-                            <select asp-for="UserId" class="form-select" aria-label="Default select example" required>
-                                <option selected>Select User</option>
-                                @foreach (var item in ViewBag.UserList)
-                                {
-                                    <option value="@item.Id">@item.Name</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
                         <label asp-for="IdKendaraan" class="col-sm-2 col-form-label">Car Names</label>
                         <div class="col-sm-10">
                             <select asp-for="IdKendaraan" class="form-select" aria-label="Default select example" required>

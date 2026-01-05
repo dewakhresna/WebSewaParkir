@@ -52,6 +52,8 @@
         <i class="bi bi-arrow-up-short"></i>
     </a>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Vendor JS Files -->
     <script src="~/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -65,5 +67,6 @@
     <!-- Template Main JS File -->
     <script src="~/js/admin.js")"></script>
 
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

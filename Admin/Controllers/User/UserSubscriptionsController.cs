@@ -25,9 +25,26 @@ namespace KandangMobil.Controllers.User
         [HttpGet]
         public async Task<IActionResult> Index(int Id)
         {
-            ViewBag.Rental = await _IMasterRental.Find(Id);
+            var carRental = await _IMasterRental.Find(Id);
+
+            if (carRental == null)
+            {
+                return NotFound(); 
+            }
+
+            var kendaraan = await _IMasterKendaraan.Find(carRental.IdKendaraan);
+
+            var model = new MasterSubscriptionsModel
+            {
+                CarRentalId = carRental.Id,
+                Car = carRental,         
+                Kendaraan = kendaraan,   
+                Price = 0                 
+            };
+
             ViewBag.Price = await _IMasterPrice.Get();
-            return View();
+
+            return View(model);
         }
         //[HttpPost]
         //public async Task<IActionResult> Add(MasterSubscriptionsModel data, IFormFile PaymentProof)

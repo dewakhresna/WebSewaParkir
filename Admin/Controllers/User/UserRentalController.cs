@@ -49,6 +49,12 @@ namespace KandangMobil.Controllers.User
             {
                 return View(data);
             }
+
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Index", "AuthUser");
+            data.UserId = userId.Value;
+
             await _IMasterRental.Add(data);
             return RedirectToAction("Index");
         }
@@ -69,6 +75,12 @@ namespace KandangMobil.Controllers.User
             {
                 return View(data);
             }
+
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Index", "AuthUser");
+            data.UserId = userId.Value;
+
             await _IMasterRental.Update(data);
             return RedirectToAction("Index");
         }
