@@ -10,6 +10,7 @@ namespace KandangMobil.Interfaces
         Task<MasterSubscriptionsModel> Add(MasterSubscriptionsModel model);
         Task<MasterSubscriptionsModel> Update(MasterSubscriptionsModel model);
         Task ConfirmTransaction(int paymentId, int status);
+        Task RejectTransaction(int paymentId, int status);
         Task<MasterSubscriptionsModel> Remove(MasterSubscriptionsModel model);
     }
 }

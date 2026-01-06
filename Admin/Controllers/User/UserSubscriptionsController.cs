@@ -1,5 +1,6 @@
 ﻿using KandangMobil.Helpers;
 using KandangMobil.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Models.Master;
 
@@ -46,45 +47,6 @@ namespace KandangMobil.Controllers.User
 
             return View(model);
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Add(MasterSubscriptionsModel data, IFormFile PaymentProof)
-        //{
-        //    int? userId = HttpContext.Session.GetInt32("UserId");
-
-        //    if (userId == null)
-        //        return RedirectToAction("Index", "AuthUser");
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        ViewBag.Rental = await _IMasterRental.Find(data.CarRentalId);
-        //        return View("Index", data);
-        //    }
-
-        //    var user = await _IMasterUser.Find(userId.Value);
-
-        //    data.UserId = user.Id;
-        //    data.EndDate = DateTime.Now.AddMonths(data.Time);
-        //    data.LastPaymentDate = DateTime.Now;
-        //    data.Price = 300000;
-        //    data.Status = 1;
-
-        //    if (PaymentProof != null && PaymentProof.Length > 0)
-        //    {
-        //        string? newFileName = await _upload.UploadFile(PaymentProof, "uploads/user/paymentproof/");
-
-        //        if (!string.IsNullOrEmpty(newFileName))
-        //        {
-        //            if (!string.IsNullOrEmpty(data.PaymentProof))
-        //            {
-        //                _upload.DeleteFile("uploads/user/paymentproof/", data.PaymentProof);
-        //            }
-
-        //            data.PaymentProof = newFileName;
-        //        }
-        //    }
-        //    await _IMasterSubscriptions.Add(data);
-        //    return RedirectToAction("Index", "UserRental");
-        //}
 
         [HttpPost]
         public async Task<IActionResult> Add(MasterSubscriptionsModel data, IFormFile PaymentProof)
@@ -122,6 +84,77 @@ namespace KandangMobil.Controllers.User
             }
 
             await _IMasterSubscriptions.Add(data);
+            return RedirectToAction("Index", "UserRental");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var subscription = await _IMasterSubscriptions.Find(Id);
+
+            if (subscription == null)
+            {
+                return NotFound();
+            }
+
+            // Pastikan data relasi (Car & Kendaraan) ter-load
+            // Jika repository .Find() Anda belum melakukan Include, Anda mungkin perlu mengambil manual:
+            subscription.Car = await _IMasterRental.Find(subscription.CarRentalId);
+            subscription.Kendaraan = await _IMasterKendaraan.Find(subscription.Car.IdKendaraan);
+
+            // Namun idealnya repository .Find() untuk Subscription sudah meng-include Car & Kendaraan.
+
+            return View(subscription);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePayment(int id, IFormFile? NewPaymentProof)
+        {
+            // 1. Ambil data transaksi lama dari database
+            var existingData = await _IMasterSubscriptions.Find(id);
+
+            if (existingData == null)
+            {
+                return NotFound();
+            }
+
+            // 2. Cek apakah user mengupload file baru
+            if (NewPaymentProof != null && NewPaymentProof.Length > 0)
+            {
+                // Tentukan folder penyimpanan (harus sama persis string-nya)
+                string folderPath = "uploads/user/paymentproof/";
+
+                // A. HAPUS FILE LAMA MENGGUNAKAN HELPER
+                // Cek dulu apakah di database ada nama filenya
+                if (!string.IsNullOrEmpty(existingData.PaymentProof))
+                {
+                    // Panggil fungsi DeleteFile dari Helper Anda
+                    // Parameter: (Folder, NamaFile)
+                    _upload.DeleteFile(folderPath, existingData.PaymentProof);
+                }
+
+                // B. UPLOAD FILE BARU MENGGUNAKAN HELPER
+                // Parameter: (FileObject, Folder)
+                string? newFileName = await _upload.UploadFile(NewPaymentProof, folderPath);
+
+                // C. Update nama file di object model jika upload sukses
+                if (!string.IsNullOrEmpty(newFileName))
+                {
+                    existingData.PaymentProof = newFileName;
+                }
+            }
+
+            // 3. Update Status Transaksi
+            // Kembalikan status ke 1 (Sedang Diproses) agar admin mengecek ulang
+            existingData.Status = 1;
+
+            // Update tanggal pembayaran terakhir
+            existingData.LastPaymentDate = DateTime.Now;
+
+            // 4. Simpan Perubahan ke Database
+            await _IMasterSubscriptions.Update(existingData);
+
+            // 5. Kembali ke halaman list
             return RedirectToAction("Index", "UserRental");
         }
     }

@@ -1,15 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Dashboard Rental";
+    ViewData["Title"] = "Dashboard Parkir Price";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 
 <div class="pagetitle">
-    <h1>Car User</h1>
+    <h1>Parkir Price</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="">Home</a></li>
-            <li class="breadcrumb-item active">Car User</li>
+            <li class="breadcrumb-item active">Parkir Price</li>
         </ol>
     </nav>
 </div>
@@ -20,20 +20,19 @@
             <div class="card recent-sales overflow-auto">
                 <div class="filter">
                     <div class="icon">
-                        <a class="btn btn-success" asp-action="Add" asp-controller="MasterRental"><i class="bx bx-list-plus me-1"></i> Add Rental</a>
+                        <a class="btn btn-success" asp-action="Add" asp-controller="MasterPrice"><i class="bx bx-list-plus me-1"></i> Add Parkir Price</a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Car Rental Data</h5>
+                    <h5 class="card-title">Parkir Price Data</h5>
 
                     <table class="table table-borderless datatable">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Customer Name</th>
-                                <th scope="col">Car Name</th>
-                                <th scope="col">Car Type</th>
-                                <th scope="col">No Police</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Duration / Month</th>
+                                <th scope="col">Description</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -44,13 +43,12 @@
                                 {
                                     <tr>
                                         <td>@no</td>
-                                        <td>@item.User?.Name</td>
-                                        <td>@item.Kendaraan?.Merek</td>
-                                        <td>@item.Kendaraan?.Tipe</td>
-                                        <td>@item.Rental?.NoPolice</td>
+                                        <td>@item.Price</td>
+                                        <td>@item.Duration</td>
+                                        <td>@item.Description</td>
                                         <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Rental.Id" class="btn badge bg-warning">Edit</a>
-                                            <a asp-action="Delete" asp-route-id="@item.Rental.Id" class="btn badge bg-danger">Delete</a>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn badge bg-warning">Edit</a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn badge bg-danger">Delete</a>
                                         </td>
                                     </tr>
                                     no++;

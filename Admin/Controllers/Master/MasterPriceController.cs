@@ -16,8 +16,8 @@ namespace KandangMobil.Controllers.Master
         }
         public async Task<IActionResult> Index()
         {
-            var rentals = await _IMasterPrice.Get();
-            return View(rentals);
+            var price = await _IMasterPrice.Get();
+            return View(price);
         }
 
         public async Task<IActionResult> Add()

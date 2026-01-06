@@ -64,16 +64,70 @@ namespace KandangMobil.Repositories
         }
         public async Task ConfirmTransaction(int id, int status)
         {
-            var sql = @"UPDATE MasterSubscriptions
+            var sql = @"
+                UPDATE MasterSubscriptions
                 SET [Status] = @Status
-                WHERE Id = @Id";
+                WHERE Id = @Id;
+
+                UPDATE MasterParkirSlot
+                SET IsOccupied = 1
+                WHERE Id = (SELECT ParkirSlotId FROM MasterSubscriptions WHERE Id = @Id);
+            ";
 
             using var connection = _DapperDbContext.CreateConnection();
-            await connection.ExecuteAsync(sql, new
+            connection.Open();
+
+            using var transaction = connection.BeginTransaction();
+
+            try
             {
-                Id = id,
-                Status = status
-            });
+                await connection.ExecuteAsync(sql, new
+                {
+                    Id = id,
+                    Status = status
+                }, transaction: transaction);
+
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
+        }
+
+        public async Task RejectTransaction(int id, int status)
+        {
+            var sql = @"
+                UPDATE MasterSubscriptions
+                SET [Status] = @Status
+                WHERE Id = @Id;
+
+                UPDATE MasterParkirSlot
+                SET IsOccupied = 0
+                WHERE Id = (SELECT ParkirSlotId FROM MasterSubscriptions WHERE Id = @Id);
+            ";
+
+            using var connection = _DapperDbContext.CreateConnection();
+            connection.Open();
+
+            using var transaction = connection.BeginTransaction();
+
+            try
+            {
+                await connection.ExecuteAsync(sql, new
+                {
+                    Id = id,
+                    Status = status
+                }, transaction: transaction);
+
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
         public async Task<MasterSubscriptionsModel> Remove(MasterSubscriptionsModel model)

@@ -1,0 +1,78 @@
+﻿@model Models.Master.MasterSubscriptionsModel
+
+@{
+    ViewData["Title"] = "Re-Upload Payment";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-warning text-white">
+                    <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Perbaiki Pembayaran</h4>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="UpdatePayment" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="@Model.Id" />
+
+                        <div class="alert alert-light border">
+                            <h5 class="alert-heading">Detail Transaksi</h5>
+                            <hr>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <strong>Mobil:</strong><br>
+                                    @(Model.Kendaraan?.Merek ?? "-") - @(Model.Kendaraan?.Tipe ?? "-")
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>No Polisi:</strong><br>
+                                    @(Model.Car?.NoPolice ?? "-")
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <strong>Total Tagihan:</strong><br>
+                                    <span class="text-success fw-bold">@Model.PriceFormatted</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>Durasi Sewa:</strong><br>
+                                    @Model.Time Bulan
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 mt-4">
+                            <label class="form-label fw-bold">Upload Bukti Pembayaran Baru</label>
+
+                            @if (!string.IsNullOrEmpty(Model.PaymentProof))
+                            {
+                                <div class="mb-2">
+                                    <small class="text-muted">File saat ini:</small>
+                                    <a href="~/uploads/user/paymentproof/@Model.PaymentProof" target="_blank" class="badge bg-secondary text-decoration-none">
+                                        <i class="bi bi-eye"></i> Lihat Bukti Lama
+                                    </a>
+                                </div>
+                            }
+
+                            <input class="form-control" type="file" name="NewPaymentProof" id="NewPaymentProof" accept="image/*" required>
+                            <div class="form-text text-danger">
+                                *Mengupload file baru akan menghapus bukti pembayaran sebelumnya.
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning text-white py-2">
+                                <i class="bi bi-upload me-2"></i>Upload Ulang & Konfirmasi
+                            </button>
+                            <a asp-controller="UserRental" asp-action="Index" class="btn btn-outline-secondary">
+                                Batal
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -62,7 +62,22 @@ namespace KandangMobil.Controllers.Master
         [HttpPost]
         public async Task<IActionResult> ConfirmTransaction(PaymentDetailViewModel model)
         {
-            await _IMasterSubscriptions.ConfirmTransaction(model.Payment.Id, model.Payment.Status);
+            if (model.Payment == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            int id = model.Payment.Id;
+            int status = model.Payment.Status;
+
+            if (status == 2)
+            {
+                await _IMasterSubscriptions.ConfirmTransaction(id, status);
+            }
+            else
+            {
+                await _IMasterSubscriptions.RejectTransaction(id, status);
+            }
             return RedirectToAction("Index");
         }
     }

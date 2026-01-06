@@ -41,7 +41,7 @@ namespace KandangMobil.Repositories
             var sql = $@"UPDATE MasterPrice
                            SET [Price] = @Price,
                                [Duration] = @Duration,
-                               [Description] = @Description,
+                               [Description] = @Description
                           WHERE
                               Id=@Id";
             using var connection = _DapperDbContext.CreateConnection();
