@@ -36,8 +36,8 @@ namespace KandangMobil.Repositories
         public async Task<MasterUserModel> Add(MasterUserModel model)
         {
             var sql = $@"
-                INSERT INTO Users (Name, Email, Telp, Password)
-                 VALUES (@Name, @Email, @Telp, @Password)";
+                INSERT INTO Users (Name, Email, Telp, Password, Photo)
+                 VALUES (@Name, @Email, @Telp, @Password, @Photo)";
 
             using var connection = _DapperDbContext.CreateConnection();
             await connection.ExecuteAsync(sql, model);
@@ -49,7 +49,8 @@ namespace KandangMobil.Repositories
                            SET [Name] = @Name,
                                [Email] = @Email,
                                [Telp] = @Telp,
-                               [Password] = @Password
+                               [Password] = @Password,
+                               [Photo] = @Photo
                           WHERE
                               Id=@Id";
 
@@ -68,6 +69,29 @@ namespace KandangMobil.Repositories
             await connection.ExecuteAsync(sql, model);
             return model;
         }
+        public async Task<MasterUserModel> UpdateProfile(MasterUserModel model)
+        {
+            var sql = $@"UPDATE Users
+                           SET [Name] = @Name,
+                               [Email] = @Email,
+                               [Telp] = @Telp,
+                               [Photo] = @Photo
+                          WHERE
+                              Id=@Id";
 
+            using var connection = _DapperDbContext.CreateConnection();
+            await connection.ExecuteAsync(sql, model);
+            return model;
+        }
+        public async Task<MasterUserModel> UpdatePassword(MasterUserModel model)
+        {
+            var sql = $@"UPDATE Users
+                           SET [Password] = @Password
+                          WHERE Id= @Id";
+
+            using var connection = _DapperDbContext.CreateConnection();
+            await connection.ExecuteAsync(sql, model);
+            return model;
+        }
     }
 }

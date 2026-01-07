@@ -17,13 +17,13 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="" alt="Profile" class="rounded-circle">
+                        <img src="/uploads/user/profile/@Model.Photo" alt="Profile" class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2"></span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Tes</h6>
+                            <h6>@Model.Name</h6>
                             <span>Kandang Mobil</span>
                         </li>
                         <li>
@@ -31,7 +31,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" asp-action="" asp-controller="">
+                            <a class="dropdown-item d-flex align-items-center" asp-action="Index" asp-controller="UserProfile">
                                 <i class="bi bi-person"></i>
                                 <span>My Profile</span>
                             </a>

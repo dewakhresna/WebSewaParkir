@@ -62,6 +62,19 @@ namespace KandangMobil.Repositories
             await connection.ExecuteAsync(sql, model);
             return model;
         }
+        public async Task<MasterSubscriptionsModel?> GetByRentalId(int carRentalId)
+        {
+            var sql = @"SELECT TOP 1 * FROM MasterSubscriptions 
+                WHERE CarRentalId = @CarRentalId 
+                ORDER BY Id DESC";
+
+            using var connection = _DapperDbContext.CreateConnection();
+
+            // Gunakan QueryFirstOrDefaultAsync karena hasilnya bisa NULL (kalau belum pernah dibooking)
+            var result = await connection.QueryFirstOrDefaultAsync<MasterSubscriptionsModel>(sql, new { CarRentalId = carRentalId });
+
+            return result;
+        }
         public async Task ConfirmTransaction(int id, int status)
         {
             var sql = @"

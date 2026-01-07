@@ -26,5 +26,8 @@ namespace Models.Master
 
         [Compare("Password", ErrorMessage = "Password dan Konfirmasi Password harus sama.")]
         public string? PasswordConfirmation { get; set; }
+        public string? CurrentPassword { get; set; }
+        public string? NewPassword { get; set; }
+        public string? Photo { get; set; }
     }
 }

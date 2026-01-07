@@ -10,5 +10,7 @@ namespace KandangMobil.Interfaces
         Task<MasterUserModel> Add(MasterUserModel model);
         Task<MasterUserModel> Update(MasterUserModel model);
         Task<MasterUserModel> Remove(MasterUserModel model);
+        Task<MasterUserModel> UpdateProfile(MasterUserModel model);
+        Task<MasterUserModel> UpdatePassword(MasterUserModel model);
     }
 }

@@ -11,11 +11,13 @@ namespace KandangMobil.Controllers.User
         private readonly IMasterRental _IMasterRental;
         private readonly IMasterKendaraan _IMasterKendaraan;
         private readonly IMasterUser _IMasterUser;
-        public UserRentalController(IMasterRental iMasterRental, IMasterKendaraan iMasterKendaraan, IMasterUser iMasterUser)
+        private readonly IMasterSubscriptions _IMasterSubscriptions;
+        public UserRentalController(IMasterRental iMasterRental, IMasterKendaraan iMasterKendaraan, IMasterUser iMasterUser, IMasterSubscriptions iMasterSubscriptions)
         {
             _IMasterRental = iMasterRental;
             _IMasterKendaraan = iMasterKendaraan;
             _IMasterUser = iMasterUser;
+            _IMasterSubscriptions = iMasterSubscriptions;
         }
         public async Task<IActionResult> Index()
         {
@@ -28,6 +30,7 @@ namespace KandangMobil.Controllers.User
             {
                 r.Kendaraan = await _IMasterKendaraan.Find(r.IdKendaraan);
                 r.User = await _IMasterUser.Find(r.UserId);
+                r.Payment = await _IMasterSubscriptions.GetByRentalId(r.Id);
             }
             return View(rentals);
         }

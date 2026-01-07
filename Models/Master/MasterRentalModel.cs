@@ -18,5 +18,6 @@ namespace Models.Master
         public MasterKendaraanModel? Kendaraan { get; set; }
         [ForeignKey("UserId")]
         public MasterUserModel? User { get; set; }
+        public MasterSubscriptionsModel Payment { get; set; }
     }
 }

@@ -80,5 +80,14 @@ namespace KandangMobil.Controllers.Master
             }
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            var payments = await _IMasterSubscriptions.Find(id);
+            if (payments != null)
+            {
+                await _IMasterSubscriptions.Remove(payments);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
